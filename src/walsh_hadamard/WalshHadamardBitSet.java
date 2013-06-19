@@ -5,6 +5,8 @@ import java.util.Random;
 
 public class WalshHadamardBitSet {
 
+	private final Random rand = new Random();
+
 	public BitSet encrypt(BitSet message, int messageLengthBits) {
 		int cypherLength = (int)Math.pow(messageLengthBits, 2);
 		BitSet output = new BitSet(cypherLength);
@@ -26,17 +28,23 @@ public class WalshHadamardBitSet {
 		
 		return output;
 	}
+	
+	public boolean recoverBitAtPosition (BitSet cyphertext, int messageLengthBits, int targetBit){
+		int x1 = rand.nextInt(messageLengthBits);
+		System.out.println(x1);
+		int x2 = x1 ^ targetBit;
+		System.out.println(x2);
+		return cyphertext.get(x1) ^ cyphertext.get(x2);
+	}
 
 	public BitSet decrypt(BitSet cyphertext, int messageLengthBits) {
 		int lengthOfPlaintext = binlog(messageLengthBits);
 		BitSet output = new BitSet(lengthOfPlaintext);
 		
-		Random rand = new Random();
-		
 		for(int i = 0; i < lengthOfPlaintext; i++) {
 			int x1 = rand.nextInt(messageLengthBits);
 			System.out.println(x1);
-			int x2 = x1 ^ i;
+			int x2 = x1 ^ (1 << i);
 			System.out.println(x2);
 			
 			output.set(i, cyphertext.get(x1) ^ cyphertext.get(x2));
@@ -61,9 +69,9 @@ public class WalshHadamardBitSet {
 	 */
 	public static void main(String[] args) {
 		WalshHadamardBitSet instance = new WalshHadamardBitSet();
-		byte[] input = { 2 };
-		BitSet cypher = instance.encrypt(BitSet.valueOf(input), 2);
-		BitSet output = instance.decrypt(cypher, 4);
+		byte[] input = { 5 };
+		BitSet cypher = instance.encrypt(BitSet.valueOf(input), 3);
+		BitSet output = instance.decrypt(cypher, 8);
 		
 		System.out.println("Input: " + input[0]  + " Output: " + output);
 
