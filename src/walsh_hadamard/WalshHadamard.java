@@ -28,14 +28,6 @@ public class WalshHadamard {
 		return output;
 	}
 	
-	public static boolean recoverBitAtPosition (BitSet cyphertext, int messageLengthBits, int targetBit){
-		int x1 = rand.nextInt(messageLengthBits);
-		System.out.println(x1);
-		int x2 = x1 ^ targetBit;
-		System.out.println(x2);
-		return cyphertext.get(x1) ^ cyphertext.get(x2);
-	}
-
 	public static BitSet decode(BitSet cyphertext, int messageLengthBits) {
 		int lengthOfPlaintext = binlog(messageLengthBits);
 		BitSet output = new BitSet(lengthOfPlaintext);
@@ -49,6 +41,13 @@ public class WalshHadamard {
 		
 		
 		return output;
+	}
+	
+	public static boolean recoverBitAtPosition (BitSet cyphertext, int messageLengthBits, int targetBit){
+		int codeLength = (int)Math.pow(2, messageLengthBits);
+		int x1 = rand.nextInt(messageLengthBits);
+		int x2 = x1 ^ (messageLengthBits-targetBit-1);
+		return cyphertext.get(codeLength-x1-1) ^ cyphertext.get(codeLength-x2-1);
 	}
 	
 	public static int binlog( int bits ) // returns 0 for bits=0
