@@ -1,6 +1,7 @@
-package walsh_hadamard;
+package walsh_hadamard.superseded;
 
 import java.util.Random;
+
 
 public class WalshHadamardImpl implements WalshHadamard {
 	

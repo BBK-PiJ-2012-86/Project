@@ -1,4 +1,5 @@
-package walsh_hadamard;
+package walsh_hadamard.superseded;
+
 
 public class WHScript {
 
