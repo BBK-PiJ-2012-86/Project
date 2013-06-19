@@ -5,33 +5,31 @@ import java.util.Random;
 
 public class WalshHadamardBitSet {
 
-	public byte[] encrypt(byte[] message, int messageLengthBits) {
-		BitSet input = BitSet.valueOf(message);
+	public BitSet encrypt(BitSet message, int messageLengthBits) {
 		int cypherLength = (int)Math.pow(messageLengthBits, 2);
 		BitSet output = new BitSet(cypherLength);
 		
 		int bytesWritten = 2;
 		
-		if(input.get(0)) {
+		if(message.get(0)) {
 			output.set(1);
 		}
 		
 		for(int i = 1; i < messageLengthBits; i++) {
-			boolean flip = input.get(i);
+			boolean flip = message.get(i);
 			
 			for(int j = 0; j < bytesWritten; j++) {
-				boolean val = input.get(j);
+				boolean val = message.get(j);
 				output.set(j + bytesWritten, val ^ flip);
 			}
 			
 			bytesWritten *= 2;
 		}
 		
-		return output.toByteArray();
+		return output;
 	}
 
-	public byte[] decrypt(byte[] cyphertext, int messageLengthBits) {
-		BitSet cypherSet = BitSet.valueOf(cyphertext);
+	public BitSet decrypt(BitSet cyphertext, int messageLengthBits) {
 		int lengthOfPlaintext = binlog(messageLengthBits);
 		BitSet output = new BitSet(lengthOfPlaintext);
 		
@@ -41,11 +39,11 @@ public class WalshHadamardBitSet {
 			int x1 = rand.nextInt(messageLengthBits);
 			int x2 = x1 ^ i;
 			
-			output.set(i, cypherSet.get(x1) ^ cypherSet.get(x2));
+			output.set(i, cyphertext.get(x1) ^ cyphertext.get(x2));
 		}
 		
 		
-		return output.toByteArray();
+		return output;
 	}
 	
 	public static int binlog( int bits ) // returns 0 for bits=0
@@ -64,11 +62,11 @@ public class WalshHadamardBitSet {
 	public static void main(String[] args) {
 		WalshHadamardBitSet instance = new WalshHadamardBitSet();
 		byte[] input = { 13 };
-		byte[] cypher = instance.encrypt(input, 8);
+		BitSet cypher = instance.encrypt(BitSet.valueOf(input), 4);
 		
-		byte[] output = instance.decrypt(cypher, 256);
+		BitSet output = instance.decrypt(cypher, 16);
 		
-		System.out.println("Input: " + input[0]  + " Output: " + output[0]);
+		System.out.println("Input: " + input[0]  + " Output: " + output);
 
 	}
 
