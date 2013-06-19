@@ -9,21 +9,19 @@ public class WalshHadamardBitSet {
 		int cypherLength = (int)Math.pow(messageLengthBits, 2);
 		BitSet output = new BitSet(cypherLength);
 		
-		int bytesWritten = 2;
+		int bitsWritten = 2;
 		
 		if(message.get(0)) {
 			output.set(1);
 		}
-		
-		for(int i = 1; i < messageLengthBits; i++) {
+		for(int i = 1; i < messageLengthBits; i++) {	//remaining bits of input
 			boolean flip = message.get(i);
-			
-			for(int j = 0; j < bytesWritten; j++) {
-				boolean val = message.get(j);
-				output.set(j + bytesWritten, val ^ flip);
+			for(int j = 0; j < bitsWritten; j++) {	//bits already worked out
+				boolean val = output.get(j);
+				output.set(j + bitsWritten, val ^ flip);
 			}
 			
-			bytesWritten *= 2;
+			bitsWritten *= 2;
 		}
 		
 		return output;
@@ -37,7 +35,9 @@ public class WalshHadamardBitSet {
 		
 		for(int i = 0; i < lengthOfPlaintext; i++) {
 			int x1 = rand.nextInt(messageLengthBits);
+			System.out.println(x1);
 			int x2 = x1 ^ i;
+			System.out.println(x2);
 			
 			output.set(i, cyphertext.get(x1) ^ cyphertext.get(x2));
 		}
@@ -61,10 +61,9 @@ public class WalshHadamardBitSet {
 	 */
 	public static void main(String[] args) {
 		WalshHadamardBitSet instance = new WalshHadamardBitSet();
-		byte[] input = { 13 };
-		BitSet cypher = instance.encrypt(BitSet.valueOf(input), 4);
-		
-		BitSet output = instance.decrypt(cypher, 16);
+		byte[] input = { 2 };
+		BitSet cypher = instance.encrypt(BitSet.valueOf(input), 2);
+		BitSet output = instance.decrypt(cypher, 4);
 		
 		System.out.println("Input: " + input[0]  + " Output: " + output);
 
