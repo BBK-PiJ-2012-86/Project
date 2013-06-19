@@ -8,19 +8,18 @@ public class WalshHadamard {
 	private final static Random rand = new Random();
 
 	public static BitSet encode(BitSet message, int messageLengthBits) {
-		int cypherLength = (int)Math.pow(messageLengthBits, 2);
+		int cypherLength = (int)Math.pow(2, messageLengthBits);
 		BitSet output = new BitSet(cypherLength);
-		
 		int bitsWritten = 2;
 		
 		if(message.get(0)) {
-			output.set(1);
+			output.set(cypherLength-2);
 		}
 		for(int i = 1; i < messageLengthBits; i++) {	//remaining bits of input
 			boolean flip = message.get(i);
-			for(int j = 0; j < bitsWritten; j++) {	//bits already worked out
+			for(int j = cypherLength-1; j >=cypherLength-bitsWritten ; j--) {	//bits already worked out
 				boolean val = output.get(j);
-				output.set(j + bitsWritten, val ^ flip);
+				output.set(j - bitsWritten, val ^ flip);
 			}
 			
 			bitsWritten *= 2;
@@ -60,19 +59,6 @@ public class WalshHadamard {
 	    if( bits >= 16  ) { bits >>>= 4; log += 4; }
 	    if( bits >= 4   ) { bits >>>= 2; log += 2; }
 	    return log + ( bits >>> 1 );
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		WalshHadamard instance = new WalshHadamard();
-		byte[] input = { 5 };
-		BitSet cypher = instance.encode(BitSet.valueOf(input), 3);
-		BitSet output = instance.decode(cypher, 8);
-		
-		System.out.println("Input: " + input[0]  + " Output: " + output);
-
 	}
 
 }
