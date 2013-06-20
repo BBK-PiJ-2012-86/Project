@@ -2,19 +2,14 @@ package walsh_hadamard;
 
 import java.util.BitSet;
 
-public class Eqn {	//THINK ABOUT xij = xji REDUNDANCY...
-	private int numVars;
+public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 	private BitSet coeffs;	// x1*x1, x1*x2, x1*x3,.. x2*x1, x2*x2, x2*x3,.. etc (atm)
 	private boolean rhs;
 	
-	public Eqn(int size) {
-		this.numVars = size;
-		coeffs = new BitSet(size*size);
+	public Eqn(int numVars) {
+		super(numVars);
+		coeffs = new BitSet(numVars*numVars);
 		rhs = false;
-	}
-	
-	public int getNumVars() {
-		return numVars;
 	}
 	
 	public void setCoeff(int i, int j, boolean val) {
@@ -45,16 +40,4 @@ public class Eqn {	//THINK ABOUT xij = xji REDUNDANCY...
 		return result;
 	}
 	
-	public static void main(String[] args) {
-		Eqn eqn = new Eqn(3);
-		eqn.setCoeff(1, 1, true);
-		System.out.println(eqn);
-		eqn.setCoeff(2, 3, true);
-		System.out.println(eqn);
-		eqn.setCoeff(2, 3, false);
-		eqn.setCoeff(3, 1, true);
-		eqn.setRhs(true);
-		System.out.println(eqn);
-	}
-
 }
