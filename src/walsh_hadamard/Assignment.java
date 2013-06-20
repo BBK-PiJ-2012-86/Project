@@ -17,8 +17,8 @@ public class Assignment extends Sized{
 	public void setAss(int... ones) {
 		ass.clear();
 		for (int i : ones) {
-			if (i<1 || i>numVars) {
-				throw new IllegalArgumentException("Can only assign values to x1 to x"+numVars);
+			if (i<1 || i>getNumVars()) {
+				throw new IllegalArgumentException("Can only assign values to x1 to x"+getNumVars());
 			}
 			ass.set(i-1);
 		}
@@ -27,10 +27,10 @@ public class Assignment extends Sized{
 	@Override
 	public String toString() {
 		String result = "Ass: ";
-		for (int i = 0; i<numVars-1; i++) {
+		for (int i = 0; i<getNumVars()-1; i++) {
 			result+="x"+(i+1)+" = "+(ass.get(i)?1:0)+", ";
 		}
-		result+="x"+(numVars)+" = "+(ass.get(numVars-1)?1:0);
+		result+="x"+(getNumVars())+" = "+(ass.get(getNumVars()-1)?1:0);
 		return result;
 	}
 

@@ -20,4 +20,12 @@ public class Proof extends Sized {
 		return crossEnc;
 	}
 	
+	public void setAssEnc(BitSet assEnc) {
+		this.assEnc = assEnc;
+	}
+
+	public void setCrossEnc(BitSet crossEnc) {
+		this.crossEnc = crossEnc;
+	}
+	
 }
