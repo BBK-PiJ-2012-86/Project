@@ -2,7 +2,7 @@ package walsh_hadamard;
 
 
 public abstract class Sized {
-	protected int numVars;
+	protected int numVars;	//make private??
 	
 	protected Sized(int numVars) {
 		if (numVars<1) {

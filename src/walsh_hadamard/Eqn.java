@@ -17,6 +17,14 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 		coeffs.set(numVars*(j-1)+i-1, val);
 	}
 	
+	public BitSet getCoeffs() {
+		return coeffs;
+	}
+	
+	public boolean getRhs() {
+		return rhs;
+	}
+	
 	public void setRhs(boolean val) {
 		this.rhs = val;
 	}

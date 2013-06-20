@@ -11,6 +11,10 @@ public class SystemEqn extends Sized{
 		eqns = new HashSet<Eqn>();
 	}
 	
+	public Set<Eqn> getEqns() {
+		return eqns;
+	}
+	
 	public boolean addEqn(Eqn eqn) {
 		if (eqn.getNumVars()==numVars) {
 			eqns.add(eqn);
