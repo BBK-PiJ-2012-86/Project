@@ -3,7 +3,7 @@ package walsh_hadamard;
 import java.util.BitSet;
 
 public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
-	private BitSet coeffs;	// x1*x1, x1*x2, x1*x3,.. x2*x1, x2*x2, x2*x3,.. etc (atm)
+	private BitSet coeffs;	// canonical ordering
 	private boolean rhs;
 	
 	public Eqn(int numVars) {

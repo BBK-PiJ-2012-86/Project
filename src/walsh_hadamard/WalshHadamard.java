@@ -7,46 +7,45 @@ public class WalshHadamard {
 
 	private final static Random rand = new Random();
 
-	public static BitSet encode(BitSet message, int messageLengthBits) {
-		int cypherLength = (int)Math.pow(2, messageLengthBits);
-		BitSet output = new BitSet(cypherLength);
-		int bitsWritten = 2;
+	public static BitSet encode(BitSet input, int inLength) {
+		int outLength = (int)Math.pow(2, inLength);
+		BitSet output = new BitSet(outLength);
+		int bitsDone = 2;
 		
-		if(message.get(messageLengthBits-1)) {
+		if(input.get(inLength-1)) {
 			output.set(1);
 		}
-		for(int i = messageLengthBits-2; i >= 0; i--) {	//remaining bits of input
-			boolean flip = message.get(i);
-			for(int j = 0; j <bitsWritten ; j++) {	//bits already worked out
+		for(int i = inLength-2; i >= 0; i--) {	//remaining bits of input
+			boolean flip = input.get(i);
+			for(int j = 0; j <bitsDone ; j++) {	//bits of output already done
 				boolean val = output.get(j);
-				output.set(j + bitsWritten, val ^ flip);
+				output.set(j + bitsDone, val ^ flip);
 			}
 			
-			bitsWritten *= 2;
+			bitsDone *= 2;
 		}
 		
 		return output;
 	}
 	
-	public static BitSet decode(BitSet cyphertext, int codeLength) {
-		int plainLength = binlog(codeLength);
-		BitSet output = new BitSet(plainLength);
+	public static BitSet decode(BitSet input, int inLength) {
+		int outLength = binlog(inLength);
+		BitSet output = new BitSet(outLength);
 		
-		for(int i = 0; i < plainLength; i++) {
-			int x1 = rand.nextInt(codeLength);
-			int x2 = x1 ^ (1 << (plainLength-i-1));
+		for(int i = 0; i < outLength; i++) {
+			int x1 = rand.nextInt(inLength);
+			int x2 = x1 ^ (1 << (outLength-i-1));
 			
-			output.set(i, cyphertext.get(x1) ^ cyphertext.get(x2));
+			output.set(i, input.get(x1) ^ input.get(x2));
 		}
 		
 		return output;
 	}
 	
-	public static boolean recoverBitAtPosition (BitSet cyphertext, int codeLength, int targetBit){
-		//int codeLength = (int)Math.pow(2, messageLengthBits);
-		int x1 = rand.nextInt(codeLength);
+	public static boolean recoverBitAtPosition (BitSet encoding, int length, int targetBit){
+		int x1 = rand.nextInt(length);
 		int x2 = x1 ^ targetBit;
-		return cyphertext.get(x1) ^ cyphertext.get(x2);
+		return encoding.get(x1) ^ encoding.get(x2);
 	}
 	
 	public static int binlog( int bits ) // returns 0 for bits=0

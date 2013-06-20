@@ -24,13 +24,5 @@ public class Prover {
 		
 		return new Proof(numVars,assEnc,crossEnc);
 	}
-	
-	public static void main(String[] args) {
-		Assignment ass = new Assignment(2);
-		ass.setAss(2);
-		System.out.println(ass);
-		Proof proof = Prover.constructProof(ass);
-		System.out.println(proof.getAssEnc());
-		System.out.println(proof.getCrossEnc());
-	}
+
 }
