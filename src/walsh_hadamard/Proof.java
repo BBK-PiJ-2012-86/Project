@@ -1,0 +1,23 @@
+package walsh_hadamard;
+
+import java.util.BitSet;
+
+public class Proof extends Sized {
+	private BitSet assEnc;
+	private BitSet crossEnc;
+	
+	public Proof(int numVars, BitSet assEnc, BitSet crossEnc) {
+		super(numVars);
+		this.assEnc = assEnc;
+		this.crossEnc = crossEnc;
+	}
+	
+	public BitSet getAssEnc() {
+		return assEnc;
+	}
+
+	public BitSet getCrossEnc() {
+		return crossEnc;
+	}
+	
+}

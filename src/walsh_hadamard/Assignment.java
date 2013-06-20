@@ -10,6 +10,10 @@ public class Assignment extends Sized{
 		ass = new BitSet(numVars);
 	}
 	
+	public BitSet getAss() {
+		return ass;
+	}
+	
 	public void setAss(int... ones) {
 		ass.clear();
 		for (int i : ones) {

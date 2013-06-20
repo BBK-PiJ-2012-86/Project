@@ -12,14 +12,14 @@ public class WalshHadamard {
 		BitSet output = new BitSet(cypherLength);
 		int bitsWritten = 2;
 		
-		if(message.get(0)) {
-			output.set(cypherLength-2);
+		if(message.get(messageLengthBits-1)) {
+			output.set(1);
 		}
-		for(int i = 1; i < messageLengthBits; i++) {	//remaining bits of input
+		for(int i = messageLengthBits-2; i >= 0; i--) {	//remaining bits of input
 			boolean flip = message.get(i);
-			for(int j = cypherLength-1; j >=cypherLength-bitsWritten ; j--) {	//bits already worked out
+			for(int j = 0; j <bitsWritten ; j++) {	//bits already worked out
 				boolean val = output.get(j);
-				output.set(j - bitsWritten, val ^ flip);
+				output.set(j + bitsWritten, val ^ flip);
 			}
 			
 			bitsWritten *= 2;
@@ -28,26 +28,25 @@ public class WalshHadamard {
 		return output;
 	}
 	
-	public static BitSet decode(BitSet cyphertext, int messageLengthBits) {
-		int lengthOfPlaintext = binlog(messageLengthBits);
-		BitSet output = new BitSet(lengthOfPlaintext);
+	public static BitSet decode(BitSet cyphertext, int codeLength) {
+		int plainLength = binlog(codeLength);
+		BitSet output = new BitSet(plainLength);
 		
-		for(int i = 0; i < lengthOfPlaintext; i++) {
-			int x1 = rand.nextInt(messageLengthBits);
-			int x2 = x1 ^ (1 << i);
+		for(int i = 0; i < plainLength; i++) {
+			int x1 = rand.nextInt(codeLength);
+			int x2 = x1 ^ (1 << (plainLength-i-1));
 			
 			output.set(i, cyphertext.get(x1) ^ cyphertext.get(x2));
 		}
 		
-		
 		return output;
 	}
 	
-	public static boolean recoverBitAtPosition (BitSet cyphertext, int messageLengthBits, int targetBit){
-		int codeLength = (int)Math.pow(2, messageLengthBits);
-		int x1 = rand.nextInt(messageLengthBits);
-		int x2 = x1 ^ (codeLength-targetBit-1);
-		return cyphertext.get(codeLength-x1-1) ^ cyphertext.get(codeLength-x2-1);
+	public static boolean recoverBitAtPosition (BitSet cyphertext, int codeLength, int targetBit){
+		//int codeLength = (int)Math.pow(2, messageLengthBits);
+		int x1 = rand.nextInt(codeLength);
+		int x2 = x1 ^ targetBit;
+		return cyphertext.get(x1) ^ cyphertext.get(x2);
 	}
 	
 	public static int binlog( int bits ) // returns 0 for bits=0
