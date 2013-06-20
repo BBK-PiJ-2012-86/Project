@@ -13,8 +13,9 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 	}
 	
 	public void setCoeff(int i, int j, boolean val) {
+		if(j<i) {throw new RuntimeException("Not allowing xij j<i for now...");}
 		coeffs.set(numVars*(i-1)+j-1, val);
-		coeffs.set(numVars*(j-1)+i-1, val);
+		//coeffs.set(numVars*(j-1)+i-1, val);
 	}
 	
 	public BitSet getCoeffs() {

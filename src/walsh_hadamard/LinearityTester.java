@@ -11,6 +11,7 @@ public class LinearityTester {	// do single test ~100 times to get 0.99 close to
 	public static boolean singleTest(BitSet input, int size) {
 		int x = rand.nextInt(size);
 		int y = rand.nextInt(size);
+		//System.out.println("x: "+x+", y: "+y);
 		boolean result = input.get(x)^input.get(y) == input.get(x^y);
 		return result;
 	}

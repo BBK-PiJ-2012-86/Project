@@ -15,18 +15,29 @@ public class AssignmentTester {
 			int i = rand.nextInt(2);
 			if (i==1) {
 				BitSet eqnCoeffs = eqn.getCoeffs();
-				for (int j = 0; j< numVars; j++) {
+				for (int j = 0; j< numVars*numVars; j++) {
 					newCoeffs.set(j,newCoeffs.get(j)^eqnCoeffs.get(j));
 				}
 				newEqn.setRhs(newEqn.getRhs()^eqn.getRhs());
 			}
 		}
-		
-		boolean result = satisfied(newEqn,input);
+
+		boolean result = input.get(asInt(newCoeffs,numVars*numVars))==newEqn.getRhs();	//query g at input coeffs..
 		return result;
 	}
 	
-	private static boolean satisfied(Eqn eqn, BitSet input) {	//put somewhere else?
+	private static int asInt(BitSet bitSet, int size) {
+		int result = 0;
+		for (int i = 0; i<size; i++) {
+			if (bitSet.get(i)) {
+				result+=Math.pow(2, size-i-1);
+			}
+		}
+		return result;
+	}
+
+	@SuppressWarnings("unused")
+	private static boolean satisfied(Eqn eqn, BitSet input) {	//put somewhere else..
 		int numVars = eqn.getNumVars();
 		BitSet coeffs = eqn.getCoeffs();
 		int i, j;

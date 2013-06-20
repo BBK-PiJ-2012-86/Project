@@ -20,7 +20,7 @@ public class EqnTest {
 		assertEquals(expected,actual);
 		
 		eqn.setCoeff(2, 3, false);
-		eqn.setCoeff(3, 1, true);
+		eqn.setCoeff(1, 3, true);
 		eqn.setRhs(true);
 		actual = eqn.toString();
 		expected = "Eqn: x1*x1 + x1*x3 = 1";

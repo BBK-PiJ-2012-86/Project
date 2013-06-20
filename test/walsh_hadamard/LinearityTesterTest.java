@@ -7,7 +7,7 @@ import java.util.BitSet;
 import org.junit.Test;
 
 public class LinearityTesterTest {
-
+	
 	@Test
 	public void testSingleTestOnValidA() {
 		BitSet input = WalshHadamard.encode(Ut.make(0,2),3);
