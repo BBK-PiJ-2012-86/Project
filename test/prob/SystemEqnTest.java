@@ -45,10 +45,9 @@ public class SystemEqnTest {
 		Eqn eqn2 = new Eqn(3);
 		eqn2.setCoeff(2, 3, true);
 		eqn2.setCoeff(2, 2, true);
-		System.out.println(eqn1.equals(eqn2));
-		assertFalse("here is the pickle",eqns.addEqn(eqn2));
+		assertFalse(eqns.addEqn(eqn2));
 		
-		
+		assertEquals(1, eqns.getEqns().size());
 	}
 
 }

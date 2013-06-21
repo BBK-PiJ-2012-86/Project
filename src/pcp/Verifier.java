@@ -29,7 +29,7 @@ public class Verifier {
 			return result;
 		}
 		result.pass = true;
-		result.message = "a pass (prob>=0.5 all ok)";
+		result.message = "pass (prob>=0.5 [ish] all ok)";
 		return result;
 	}
 

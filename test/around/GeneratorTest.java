@@ -8,13 +8,13 @@ public class GeneratorTest {
 
 	@Test (expected = IllegalArgumentException.class)
 	public void testMakeSysEqnTooMany() {
-		Generator.makeSysEqn(2, 17);
+		Generator.makeSysEqn(2, 15);
 	}
 	
 	@Test
 	public void testMakeSysEqn() {
-		int actual = Generator.makeSysEqn(2, 16).getEqns().size();
-		int expected = 16;
+		int actual = Generator.makeSysEqn(2, 14).getEqns().size();
+		int expected = 14;
 		assertEquals(expected,actual);
 	}
 

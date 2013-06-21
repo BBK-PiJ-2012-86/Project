@@ -45,7 +45,7 @@ public class VerifierTest {
 	public void testVerifyValid() {
 		VResult result = Verifier.verify(proof, eqns);
 		assertTrue(result.pass);
-		assertEquals("a pass (prob>=0.5 all ok)",result.message);
+		assertEquals("pass (prob>=0.5 [ish] all ok)",result.message);
 	}
 	
 	@Test

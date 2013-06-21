@@ -12,9 +12,11 @@ public class Generator {
 	public static Eqn makeEqn(int numVars) {
 		Eqn eqn = new Eqn(numVars);
 		
-		for (int i = 1; i<=numVars; i++) {
-			for (int j = i; j<=numVars; j++) {
-				eqn.setCoeff(i, j, rand.nextBoolean());
+		while(eqn.getCoeffs().isEmpty()) {
+			for (int i = 1; i<=numVars; i++) {
+				for (int j = i; j<=numVars; j++) {
+					eqn.setCoeff(i, j, rand.nextBoolean());
+				}
 			}
 		}
 		eqn.setRhs(rand.nextBoolean());
@@ -22,7 +24,7 @@ public class Generator {
 	}
 	
 	public static SysEqn makeSysEqn(int numVars, int numEqns) {
-		if(numEqns>Math.pow(2,numVars*(numVars+1)/2+1)) {
+		if(numEqns>Math.pow(2,numVars*(numVars+1)/2+1)-2) {
 			throw new IllegalArgumentException("Can't have "+numEqns+" eqns with "+numVars+" vars!");
 		}
 		SysEqn eqns = new SysEqn(numVars);
@@ -35,13 +37,32 @@ public class Generator {
 		return eqns;
 	}
 	
-	
-	public static Assignment makeAss(int numVars) {
+		public static Assignment makeAss(int numVars) {
 		Assignment ass = new Assignment(numVars);
 		for (int i = 1; i<=numVars; i++) {
 			ass.setVal(i, rand.nextBoolean());
 		}
 		return ass;
 	}
+	
+	public static SysEqnAss makeQuadeq(int numVars, int numEqns) {
+		if (numEqns>2*numVars) {
+			throw new IllegalArgumentException("Do you really need "+numEqns+" eqns with "+numVars+" vars?");
+		}
+		SysEqnAss result = new SysEqnAss();
+		Boolean sat = false;
+		SysEqn eqns = null;
+		Assignment ass = null;
+		while(!sat) {
+			eqns = Generator.makeSysEqn(numVars, numEqns);
+			ass = Generator.makeAss(numVars);
+			sat = Checker.satisfies(ass, eqns);
+		}
+		result.sysEqn = eqns;
+		result.ass = ass;
+		return result;
+		
+	}
+	
 	
 }

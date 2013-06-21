@@ -30,6 +30,15 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 		this.rhs = val;
 	}
 	
+	/*public boolean isSubEqnOf(Eqn other) {
+		for(int i = 0; i<numVars; i++) {
+			if(coeffs.get(i)&& !other.getCoeffs().get(i)) {
+				return false;
+			}
+		}
+		return true;
+	}*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
