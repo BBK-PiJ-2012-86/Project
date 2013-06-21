@@ -11,11 +11,11 @@ public class Assignment extends Sized{
 		assSet = new BitSet(numVars);
 	}
 	
-	public BitSet getAss() {
+	public BitSet getAssSet() {
 		return assSet;
 	}
 	
-	public void setAss(int... ones) {
+	public void setAssSet(int... ones) {
 		assSet.clear();
 		for (int i : ones) {
 			if (i<1 || i>getNumVars()) {

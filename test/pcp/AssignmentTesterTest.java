@@ -9,14 +9,14 @@ import pcp.Proof;
 import pcp.Prover;
 import prob.Assignment;
 import prob.Eqn;
-import prob.SystemEqn;
+import prob.SysEqn;
 
 public class AssignmentTesterTest {
 
 	@Test
 	public void testTestValidA() {
 		
-		SystemEqn eqns = new SystemEqn(2);
+		SysEqn eqns = new SysEqn(2);
 		
 		Eqn eqn1 = new Eqn(2);
 		eqn1.setCoeff(1, 2, true);
@@ -31,7 +31,7 @@ public class AssignmentTesterTest {
 		eqns.addEqn(eqn2);
 		
 		Assignment ass = new Assignment(2);
-		ass.setAss(1,2);
+		ass.setAssSet(1,2);
 		Proof proof = Prover.constructProof(ass);
 
 		assertTrue(AssignmentTester.test(eqns, proof.getCrossEnc(), 10));
@@ -41,7 +41,7 @@ public class AssignmentTesterTest {
 	@Test
 	public void testTestB() {
 		
-		SystemEqn eqns = new SystemEqn(3);
+		SysEqn eqns = new SysEqn(3);
 		
 		Eqn eqn1 = new Eqn(3);
 		eqn1.setCoeff(1, 2, true);
@@ -60,15 +60,15 @@ public class AssignmentTesterTest {
 		eqns.addEqn(eqn3);
 		
 		Assignment ass = new Assignment(3);
-		ass.setAss(1,2);
+		ass.setAssSet(1,2);
 		Proof proof = Prover.constructProof(ass);
 		assertTrue(AssignmentTester.test(eqns, proof.getCrossEnc(), 1));
 		
-		ass.setAss();
-		assertFalse(AssignmentTester.test(eqns, ass.getAss(), 10));	//unlikely to fail..
+		ass.setAssSet();
+		assertFalse(AssignmentTester.test(eqns, ass.getAssSet(), 10));	//unlikely to fail..
 		
-		ass.setAss(2,3);
-		assertFalse(AssignmentTester.test(eqns, ass.getAss(), 10));	//unlikely to fail..
+		ass.setAssSet(2,3);
+		assertFalse(AssignmentTester.test(eqns, ass.getAssSet(), 10));	//unlikely to fail..
 		
 	}
 

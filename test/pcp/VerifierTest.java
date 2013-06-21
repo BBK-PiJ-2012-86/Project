@@ -13,15 +13,15 @@ import pcp.VResult;
 import pcp.Verifier;
 import prob.Assignment;
 import prob.Eqn;
-import prob.SystemEqn;
+import prob.SysEqn;
 
 public class VerifierTest {
-	private SystemEqn eqns;
+	private SysEqn eqns;
 	private Proof proof;
 	
 	@Before
 	public void setUp() {
-		eqns = new SystemEqn(2);
+		eqns = new SysEqn(2);
 		
 		Eqn eqn1 = new Eqn(2);
 		eqn1.setCoeff(1, 2, true);
@@ -36,7 +36,7 @@ public class VerifierTest {
 		eqns.addEqn(eqn2);
 		
 		Assignment ass = new Assignment(2);
-		ass.setAss(1,2);
+		ass.setAssSet(1,2);
 		proof = Prover.constructProof(ass);
 		
 	}
@@ -91,7 +91,7 @@ public class VerifierTest {
 	@Test
 	public void testVerifyAssWrong() {
 		Assignment diffAss = new Assignment(2);
-		diffAss.setAss(2);
+		diffAss.setAssSet(2);
 		proof = Prover.constructProof(diffAss);
 		
 		int count = 0;

@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import prob.Eqn;
-import prob.SystemEqn;
+import prob.SysEqn;
 
 public class SystemEqnTest {
 
 	@Test
-	public void test() {
-		SystemEqn equations = new SystemEqn(3);
+	public void testSet() {
+		SysEqn equations = new SysEqn(3);
 		
 		Eqn eqn1 = new Eqn(3);
 		eqn1.setCoeff(2, 3, true);
@@ -30,6 +30,25 @@ public class SystemEqnTest {
 		assertTrue(result.startsWith("-----"));
 		assertTrue(result.endsWith("-----"));
 		assertEquals(52,result.length());
+	}
+	
+	@Test
+	public void testAddEqn() {
+		SysEqn eqns = new SysEqn(3);
+		
+		Eqn eqn1 = new Eqn(3);
+		eqn1.setCoeff(2, 3, true);
+		eqn1.setCoeff(2, 2, true);
+		assertTrue(eqns.addEqn(eqn1));
+		assertFalse(eqns.addEqn(eqn1));
+		
+		Eqn eqn2 = new Eqn(3);
+		eqn2.setCoeff(2, 3, true);
+		eqn2.setCoeff(2, 2, true);
+		System.out.println(eqn1.equals(eqn2));
+		assertFalse("here is the pickle",eqns.addEqn(eqn2));
+		
+		
 	}
 
 }

@@ -1,10 +1,10 @@
 package pcp;
 
-import prob.SystemEqn;
+import prob.SysEqn;
 
 public class Verifier {
 	
-	public static VResult verify(Proof proof, SystemEqn eqns) {
+	public static VResult verify(Proof proof, SysEqn eqns) {
 		VResult result = new VResult();
 		int numVars = proof.getNumVars();
 		if(!LinearityTester.test(proof.getAssEnc(), (int)Math.pow(2, numVars), 0.99)) {

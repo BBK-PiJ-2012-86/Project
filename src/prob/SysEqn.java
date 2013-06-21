@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class SystemEqn extends Sized{
+public class SysEqn extends Sized{
 	private Set<Eqn> eqns;
 	
-	public SystemEqn(int numVars) {
+	public SysEqn(int numVars) {
 		super(numVars);
 		eqns = new HashSet<Eqn>();
 	}
@@ -18,8 +18,7 @@ public class SystemEqn extends Sized{
 	
 	public boolean addEqn(Eqn eqn) {
 		if (eqn.getNumVars()==numVars) {
-			eqns.add(eqn);
-			return true;
+			return eqns.add(eqn);
 		}
 		return false;
 	}

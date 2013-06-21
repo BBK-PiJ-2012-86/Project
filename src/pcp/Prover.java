@@ -8,7 +8,7 @@ public class Prover {
 
 	public static Proof constructProof(Assignment ass) {
 		int numVars = ass.getNumVars();
-		BitSet assSet = ass.getAss();
+		BitSet assSet = ass.getAssSet();
 		
 		BitSet assEnc = WalshHadamard.encode(assSet, numVars);
 		

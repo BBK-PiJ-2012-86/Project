@@ -16,7 +16,7 @@ public class ProverTest {
 	@Test
 	public void testConstructProofA() {
 		Assignment ass = new Assignment(2);
-		ass.setAss(2);
+		ass.setAssSet(2);
 		Proof proof = Prover.constructProof(ass);
 		
 		BitSet expectedAssEnc = Ut.make(1,3);
@@ -29,7 +29,7 @@ public class ProverTest {
 	@Test
 	public void testConstructProofB() {
 		Assignment ass = new Assignment(3);
-		ass.setAss(1,2);
+		ass.setAssSet(1,2);
 		Proof proof = Prover.constructProof(ass);
 		
 		BitSet expectedAssEnc = Ut.make(2,3,4,5);

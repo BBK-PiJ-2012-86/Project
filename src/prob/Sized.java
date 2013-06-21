@@ -14,4 +14,28 @@ public abstract class Sized {
 	public int getNumVars() {
 		return numVars;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + numVars;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Sized))
+			return false;
+		Sized other = (Sized) obj;
+		if (numVars != other.numVars)
+			return false;
+		return true;
+	}
+	
+	
 }
