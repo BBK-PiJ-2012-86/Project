@@ -1,7 +1,10 @@
-package walsh_hadamard;
+package pcp;
 
 import java.util.BitSet;
 import java.util.Random;
+
+import prob.Eqn;
+import prob.SystemEqn;
 
 public class AssignmentTester {
 

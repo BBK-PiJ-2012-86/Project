@@ -1,8 +1,10 @@
-package walsh_hadamard;
+package prob;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import prob.Assignment;
 
 public class AssignmentTest {
 

@@ -1,4 +1,4 @@
-package walsh_hadamard;
+package pcp;
 
 import java.util.Random;
 

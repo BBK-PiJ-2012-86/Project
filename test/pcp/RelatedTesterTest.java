@@ -1,8 +1,13 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import pcp.Proof;
+import pcp.Prover;
+import pcp.RelatedTester;
+import prob.Assignment;
 
 public class RelatedTesterTest {
 

@@ -1,4 +1,4 @@
-package walsh_hadamard.superseded;
+package superseded;
 
 /**
  * Encode or decode byte arrays using the Walsh-Hadamard code.

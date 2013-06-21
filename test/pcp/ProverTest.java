@@ -1,10 +1,15 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
 import java.util.BitSet;
 
 import org.junit.Test;
+
+import pcp.Proof;
+import pcp.Prover;
+import pcp.WalshHadamard;
+import prob.Assignment;
 
 public class ProverTest {
 

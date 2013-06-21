@@ -1,8 +1,15 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import pcp.AssignmentTester;
+import pcp.Proof;
+import pcp.Prover;
+import prob.Assignment;
+import prob.Eqn;
+import prob.SystemEqn;
 
 public class AssignmentTesterTest {
 

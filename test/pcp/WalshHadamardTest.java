@@ -1,4 +1,4 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,8 @@ import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import pcp.WalshHadamard;
 
 public class WalshHadamardTest {
 

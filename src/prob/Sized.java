@@ -1,4 +1,4 @@
-package walsh_hadamard;
+package prob;
 
 
 public abstract class Sized {

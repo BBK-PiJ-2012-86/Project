@@ -1,7 +1,8 @@
-package walsh_hadamard;
+package prob;
 
 import java.util.HashSet;
 import java.util.Set;
+
 
 public class SystemEqn extends Sized{
 	private Set<Eqn> eqns;

@@ -1,6 +1,8 @@
-package walsh_hadamard;
+package pcp;
 
 import java.util.BitSet;
+
+import prob.Assignment;
 
 public class Prover {
 

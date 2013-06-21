@@ -1,10 +1,13 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
 import java.util.BitSet;
 
 import org.junit.Test;
+
+import pcp.LinearityTester;
+import pcp.WalshHadamard;
 
 public class LinearityTesterTest {
 	

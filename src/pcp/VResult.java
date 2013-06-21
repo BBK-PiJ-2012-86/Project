@@ -1,4 +1,4 @@
-package walsh_hadamard;
+package pcp;
 
 public class VResult {		//change to be nicer?
 	public boolean pass;

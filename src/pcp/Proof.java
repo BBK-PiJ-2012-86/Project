@@ -1,6 +1,8 @@
-package walsh_hadamard;
+package pcp;
 
 import java.util.BitSet;
+
+import prob.Sized;
 
 public class Proof extends Sized {
 	private BitSet assEnc;

@@ -1,4 +1,4 @@
-package walsh_hadamard;
+package pcp;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,14 @@ import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import pcp.Proof;
+import pcp.Prover;
+import pcp.VResult;
+import pcp.Verifier;
+import prob.Assignment;
+import prob.Eqn;
+import prob.SystemEqn;
 
 public class VerifierTest {
 	private SystemEqn eqns;

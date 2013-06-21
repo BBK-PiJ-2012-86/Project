@@ -1,8 +1,11 @@
-package walsh_hadamard;
+package prob;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import prob.Eqn;
+import prob.SystemEqn;
 
 public class SystemEqnTest {
 

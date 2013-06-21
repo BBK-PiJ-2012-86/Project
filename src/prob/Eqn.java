@@ -1,6 +1,7 @@
-package walsh_hadamard;
+package prob;
 
 import java.util.BitSet;
+
 
 public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 	private BitSet coeffs;	// canonical ordering
