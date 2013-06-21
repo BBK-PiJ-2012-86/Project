@@ -15,8 +15,7 @@ public class AssignmentTester {
 		Eqn newEqn = new Eqn(numVars);
 		BitSet newCoeffs = newEqn.getCoeffs();
 		for (Eqn eqn : eqns.getEqns()) {
-			int i = rand.nextInt(2);
-			if (i==1) {
+			if (rand.nextBoolean()) {
 				BitSet eqnCoeffs = eqn.getCoeffs();
 				for (int j = 0; j< numVars*numVars; j++) {
 					newCoeffs.set(j,newCoeffs.get(j)^eqnCoeffs.get(j));
