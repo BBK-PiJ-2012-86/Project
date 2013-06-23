@@ -1,15 +1,15 @@
 package new_approach;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.BitSet;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import pcp.Prover;
 import pcp.Ut;
-import pcp.Verifier;
 import prob.Assignment;
 import prob.Eqn;
 import prob.SysEqn;
@@ -89,8 +89,7 @@ public class WHTest {
 	}
 	
 	@Test
-	public void testFullCycleWrong() {
-		//Correct assignment
+	public void testFullCycleWrongAss() {
 		SysEqn eqns = new SysEqn(2);
 		
 		Eqn eqn1 = new Eqn(2);
@@ -108,19 +107,20 @@ public class WHTest {
 		Assignment diffAss = new Assignment(2);
 		diffAss.setAssSet(2);
 		
-		BitSet[][] req = WH.verifRequest(eqns);
-		BitSet[] info = WH.proverInfo(diffAss, req);
+	
 		
 		int count = 0;
 		for (int i = 0; i<5; i++ ) {
+			BitSet[][] req = WH.verifRequest(eqns);
+			BitSet[] info = WH.proverInfo(diffAss, req);
 			boolean res = WH.verifIt(eqns, info);
 			if(res) {
 				count++;
 			} else {
-				assertTrue(!res);
+				System.out.println(WH.message);
 			}
 		}
-		assertTrue(count<8);
+		assertTrue("main bit",count<5);
 	}
 	
 }

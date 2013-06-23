@@ -96,7 +96,7 @@ public class VerifierTest {
 		
 		int count = 0;
 		VResult result;
-		for (int i = 0; i<5; i++ ) {
+		for (int i = 0; i<8; i++ ) {
 			result = Verifier.verify(proof, eqns);
 			if(result.pass) {
 				count++;

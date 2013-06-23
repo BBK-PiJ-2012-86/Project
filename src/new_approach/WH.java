@@ -10,7 +10,8 @@ import prob.SysEqn;
 public class WH {
 	
 	private static Random rand = new Random();
-	private static boolean[] rhs = new boolean[2];		// just for now for testing
+	public static boolean[] rhs = new boolean[2];		// just for now for testing
+	public static String message = null;				// just for now for testing
 
 	public static boolean encodeBit(BitSet input, BitSet position) {
 		position.and(input);
@@ -106,14 +107,23 @@ public class WH {
 	public static boolean verifIt(SysEqn eqns, BitSet[] pInf) {
 		for (int j = 0; j<2; j++) {
 			for (int i = 0; i<100; i++) {
-				if(  (pInf[j].get(3*i)^pInf[j].get(3*i+1))  != pInf[j].get(3*i+2) ) {return false;}
+				if(  (pInf[j].get(3*i)^pInf[j].get(3*i+1))  != pInf[j].get(3*i+2) ) {
+					message = "failed linearity on "+i;
+					return false;
+					}
 			}
 		}
 		for (int i = 0; i<3; i++) {
-			if( (pInf[0].get(300+2*i)&&pInf[0].get(300+2*i+1)) != pInf[1].get(300+i)) {return false;}
+			if( (pInf[0].get(300+2*i)&&pInf[0].get(300+2*i+1)) != pInf[1].get(300+i)) {
+				message = "failed rel test";
+				return false;
+				}
 		}
 		for (int i = 0; i<2; i++) {
-			if( pInf[1].get(303+i)!= rhs[i]) {return false;}
+			if( pInf[1].get(303+i)!= rhs[i]) {
+				message = "failed ass test";
+				return false;
+				}
 		}
 		return true;
 		
