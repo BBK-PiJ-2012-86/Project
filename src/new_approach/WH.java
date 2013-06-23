@@ -60,7 +60,7 @@ public class WH {
 			result[1][i+2].xor(result[1][i+1]);
 		}
 		// for rel testing
-		for (int i = 0; i<4; i++) {
+		for (int i = 0; i<3; i++) {
 			result[0][300+2*i] = getRand(assSize);
 			result[0][300+2*i+1] = getRand(assSize);
 			result[1][300+i] = doCross(result[0][300+2*i],result[0][300+2*i+1], assSize);
@@ -79,7 +79,7 @@ public class WH {
 					newEqn.setRhs(newEqn.getRhs()^eqn.getRhs());
 				}
 			}
-			result[1][304+i] = newCoeffs;	//might be wrong
+			result[1][303+i] = newCoeffs;	//might be wrong
 		}
 		return result;
 	}
