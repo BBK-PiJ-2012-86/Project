@@ -65,7 +65,7 @@ public class Generator {
 	}
 	
 	public static SysEqnAss makeQuadeqEff(int numVars, int numEqns) {//TODO: properly
-		if (numEqns>2*numVars) {
+		if (numEqns>3*numVars) {
 			throw new IllegalArgumentException("Do you really need "+numEqns+" eqns with "+numVars+" vars?");
 		}
 		SysEqnAss result = new SysEqnAss();

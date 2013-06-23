@@ -6,23 +6,17 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.BitSet;
 
-import org.junit.Before;
 import org.junit.Test;
-
-import around.Checker;
-import around.Generator;
-import around.SysEqnAss;
 
 import pcp.Ut;
 import prob.Assignment;
 import prob.Eqn;
 import prob.SysEqn;
+import around.Checker;
+import around.Generator;
+import around.SysEqnAss;
 
 public class WHTest {
-	/*
-	@Before
-	public void setUp() throws Exception {
-	}
 
 	@Test
 	public void testEncodeBit() {
@@ -151,12 +145,12 @@ public class WHTest {
 		info[0].set(1, !info[0].get(1));	//twiddled
 		assertFalse( WH.verifIt(eqns, info));
 		//System.out.println(WH.message);
-	}*/
+	}
 	
 	@Test
 	public void testBig() {
-		int toChange = 100;
-		SysEqnAss it = Generator.makeQuadeqEff(toChange, (int) (toChange*1.5));
+		int toChange = 200;
+		SysEqnAss it = Generator.makeQuadeqEff(toChange, (int) (toChange*2));
 		System.out.println("made");
 		//System.out.println(it.sysEqn);
 		long time0 = System.currentTimeMillis();
