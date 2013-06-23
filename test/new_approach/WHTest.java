@@ -117,10 +117,36 @@ public class WHTest {
 			if(res) {
 				count++;
 			} else {
-				System.out.println(WH.message);
+				//System.out.println(WH.message);
 			}
 		}
 		assertTrue("main bit",count<5);
+	}
+	
+	@Test
+	public void testFullCycleWrongLinear() {
+		SysEqn eqns = new SysEqn(2);
+		
+		Eqn eqn1 = new Eqn(2);
+		eqn1.setCoeff(1, 2, true);
+		eqn1.setCoeff(2, 2, true);
+		
+		
+		Eqn eqn2 = new Eqn(2);
+		eqn2.setCoeff(1, 1, true);
+		eqn2.setRhs(true);
+
+		eqns.addEqn(eqn1);
+		eqns.addEqn(eqn2);
+		
+		Assignment ass = new Assignment(2);
+		ass.setAssSet(2);
+		
+		BitSet[][] req = WH.verifRequest(eqns);
+		BitSet[] info = WH.proverInfo(ass, req);
+		info[0].set(1, !info[0].get(1));	//twiddled
+		assertFalse( WH.verifIt(eqns, info));
+		//System.out.println(WH.message);
 	}
 	
 }
