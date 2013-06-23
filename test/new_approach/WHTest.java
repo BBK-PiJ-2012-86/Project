@@ -7,7 +7,11 @@ import java.util.BitSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import pcp.Prover;
 import pcp.Ut;
+import pcp.Verifier;
+import prob.Assignment;
+import prob.Eqn;
 import prob.SysEqn;
 
 public class WHTest {
@@ -56,6 +60,67 @@ public class WHTest {
 	@Test
 	public void testProverInfo() {
 	
+	}
+	
+	@Test
+	public void testFullCycleCorrect() {
+		//Correct assignment
+		SysEqn eqns = new SysEqn(2);
+		
+		Eqn eqn1 = new Eqn(2);
+		eqn1.setCoeff(1, 2, true);
+		eqn1.setCoeff(2, 2, true);
+		
+		
+		Eqn eqn2 = new Eqn(2);
+		eqn2.setCoeff(1, 1, true);
+		eqn2.setRhs(true);
+
+		eqns.addEqn(eqn1);
+		eqns.addEqn(eqn2);
+		
+		Assignment ass = new Assignment(2);
+		ass.setAssSet(1,2);
+		
+		BitSet[][] req = WH.verifRequest(eqns);
+		BitSet[] info = WH.proverInfo(ass, req);
+		
+		assertTrue(WH.verifIt(eqns, info));
+	}
+	
+	@Test
+	public void testFullCycleWrong() {
+		//Correct assignment
+		SysEqn eqns = new SysEqn(2);
+		
+		Eqn eqn1 = new Eqn(2);
+		eqn1.setCoeff(1, 2, true);
+		eqn1.setCoeff(2, 2, true);
+		
+		
+		Eqn eqn2 = new Eqn(2);
+		eqn2.setCoeff(1, 1, true);
+		eqn2.setRhs(true);
+
+		eqns.addEqn(eqn1);
+		eqns.addEqn(eqn2);
+		
+		Assignment diffAss = new Assignment(2);
+		diffAss.setAssSet(2);
+		
+		BitSet[][] req = WH.verifRequest(eqns);
+		BitSet[] info = WH.proverInfo(diffAss, req);
+		
+		int count = 0;
+		for (int i = 0; i<5; i++ ) {
+			boolean res = WH.verifIt(eqns, info);
+			if(res) {
+				count++;
+			} else {
+				assertTrue(!res);
+			}
+		}
+		assertTrue(count<8);
 	}
 	
 }
