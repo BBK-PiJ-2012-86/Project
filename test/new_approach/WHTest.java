@@ -53,4 +53,9 @@ public class WHTest {
 		//TODO: more tests
 	}
 	
+	@Test
+	public void testProverInfo() {
+	
+	}
+	
 }
