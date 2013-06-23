@@ -64,5 +64,27 @@ public class Generator {
 		
 	}
 	
+	public static SysEqnAss makeQuadeqEff(int numVars, int numEqns) {//TODO: properly
+		if (numEqns>2*numVars) {
+			throw new IllegalArgumentException("Do you really need "+numEqns+" eqns with "+numVars+" vars?");
+		}
+		SysEqnAss result = new SysEqnAss();
+		Eqn newEqn = null;
+		SysEqn eqns = new SysEqn(numVars);
+		Assignment ass = makeAss(numVars);
+		int count = 0;
+		while(count<numEqns) {
+			newEqn = makeEqn(numVars);
+			if (Checker.satisfies(ass, newEqn)) {
+				eqns.addEqn(newEqn);
+				count++;
+			}
+		}
+		result.sysEqn = eqns;
+		result.ass = ass;
+		return result;
+		
+	}
+	
 	
 }

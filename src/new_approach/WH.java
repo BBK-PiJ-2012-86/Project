@@ -82,7 +82,7 @@ public class WH {
 				}
 			}
 			result[1][303+i] = newCoeffs;	//might be wrong
-			/*TODO: properly*/ rhs[i]=newEqn.getRhs();
+			/*to do properly*/ rhs[i]=newEqn.getRhs();
 		}
 		return result;
 	}

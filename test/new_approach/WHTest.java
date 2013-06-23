@@ -9,6 +9,10 @@ import java.util.BitSet;
 import org.junit.Before;
 import org.junit.Test;
 
+import around.Checker;
+import around.Generator;
+import around.SysEqnAss;
+
 import pcp.Ut;
 import prob.Assignment;
 import prob.Eqn;
@@ -147,6 +151,20 @@ public class WHTest {
 		info[0].set(1, !info[0].get(1));	//twiddled
 		assertFalse( WH.verifIt(eqns, info));
 		//System.out.println(WH.message);
+	}
+	
+	@Test
+	public void testBig() {
+		SysEqnAss it = Generator.makeQuadeqEff(700, 1000);
+		System.out.println("made");
+		//System.out.println(it.sysEqn);
+		long time = System.currentTimeMillis();
+		BitSet[][] req = WH.verifRequest(it.sysEqn);
+		BitSet[] info = WH.proverInfo(it.ass, req);
+		System.out.println(WH.verifIt(it.sysEqn, info));
+		System.out.println(System.currentTimeMillis()-time);
+		Checker.satisfies(it.ass, it.sysEqn);
+		System.out.println(System.currentTimeMillis()-time);
 	}
 	
 }
