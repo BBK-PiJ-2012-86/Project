@@ -10,15 +10,6 @@ import org.junit.Test;
 public class WalshHadamardTest {
 
 	@Test
-	public void testEncodeBit() {
-		BitSet input = Ut.make(0);	//i.e. 01
-		BitSet position = Ut.make(1);	//i.e. 2
-		boolean result = WalshHadamard.encodeBit(input, 2, position);
-		//encoding 0101
-		assertFalse( result);
-	}
-
-	@Test
 	public void testEncode5() {
 		BitSet input = Ut.make(0,2);
 		BitSet codeword = WalshHadamard.encode(input, 3);
