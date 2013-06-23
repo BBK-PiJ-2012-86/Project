@@ -49,14 +49,14 @@ public class WH {
 			wanted[i] = getRand(assEncSize);
 			wanted[i+1] = getRand(assEncSize);
 			wanted[i+2] = (BitSet) wanted[i].clone();
-			wanted[i+2].xor(wanted[i]);
+			wanted[i+2].xor(wanted[i+1]);
 		}
-		// for linearity of ass encoding
+		// for linearity of cross encoding
 		for (int i = 300; i<600; i+=3) {
 			wanted[i] = getRand(crossEncSize);
 			wanted[i+1] = getRand(crossEncSize);
 			wanted[i+2] = (BitSet) wanted[i].clone();
-			wanted[i+2].xor(wanted[i]);
+			wanted[i+2].xor(wanted[i+1]);
 		}
 		// for rel testing
 		for (int i = 600; i<609; i+=3) {
