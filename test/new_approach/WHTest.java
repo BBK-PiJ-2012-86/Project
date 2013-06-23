@@ -155,7 +155,7 @@ public class WHTest {
 	
 	@Test
 	public void testBig() {
-		SysEqnAss it = Generator.makeQuadeqEff(700, 1000);
+		SysEqnAss it = Generator.makeQuadeqEff(800, 1200);
 		System.out.println("made");
 		//System.out.println(it.sysEqn);
 		long time = System.currentTimeMillis();
@@ -163,6 +163,7 @@ public class WHTest {
 		BitSet[] info = WH.proverInfo(it.ass, req);
 		System.out.println(WH.verifIt(it.sysEqn, info));
 		System.out.println(System.currentTimeMillis()-time);
+		time = System.currentTimeMillis();
 		Checker.satisfies(it.ass, it.sysEqn);
 		System.out.println(System.currentTimeMillis()-time);
 	}
