@@ -19,7 +19,7 @@ import prob.Eqn;
 import prob.SysEqn;
 
 public class WHTest {
-
+	/*
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -151,21 +151,22 @@ public class WHTest {
 		info[0].set(1, !info[0].get(1));	//twiddled
 		assertFalse( WH.verifIt(eqns, info));
 		//System.out.println(WH.message);
-	}
+	}*/
 	
 	@Test
 	public void testBig() {
-		SysEqnAss it = Generator.makeQuadeqEff(800, 1200);
+		int toChange = 100;
+		SysEqnAss it = Generator.makeQuadeqEff(toChange, (int) (toChange*1.5));
 		System.out.println("made");
 		//System.out.println(it.sysEqn);
-		long time = System.currentTimeMillis();
+		long time0 = System.currentTimeMillis();
 		BitSet[][] req = WH.verifRequest(it.sysEqn);
 		BitSet[] info = WH.proverInfo(it.ass, req);
 		System.out.println(WH.verifIt(it.sysEqn, info));
-		System.out.println(System.currentTimeMillis()-time);
-		time = System.currentTimeMillis();
-		Checker.satisfies(it.ass, it.sysEqn);
-		System.out.println(System.currentTimeMillis()-time);
+		long time1 = System.currentTimeMillis(); 
+		System.out.println(Checker.satisfies(it.ass, it.sysEqn));
+		long time2 = System.currentTimeMillis(); 
+		System.out.println(((double)(time2-time1))/((double)(time1-time0)));
 	}
 	
 }
