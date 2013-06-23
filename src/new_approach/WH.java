@@ -84,14 +84,32 @@ public class WH {
 		return result;
 	}
 	
-	public static BitSet proverInfo(Assignment assignment, BitSet[] request) {
+	public static BitSet[] proverInfo(Assignment assignment, BitSet[][] request) {
 		int numVars = assignment.getNumVars();
 		BitSet ass = assignment.getAssSet();
 		BitSet cross = doCross(ass, ass, numVars);
-		BitSet result = new BitSet(611);
-		//  etc
-		
+		BitSet[] result = new BitSet[2];
+		result[0] = new BitSet(306);
+		result[1] = new BitSet(305);
+		for (int i = 0; i<306; i++) {
+			result[0].set(i,encodeBit(ass, request[0][i]));
+		}
+		for (int i = 0; i<305; i++) {
+			result[1].set(i,encodeBit(cross, request[1][i]));
+		}
 		return result;
+		
+	}
+	
+	public static boolean verifIt(SysEqn eqns, BitSet[] pInf) {
+		for (int i = 0; i<2; i++) {
+			for (int j = 0; j<100; j++) {
+				if(  (pInf[i].get(3*j)^pInf[i].get(3*j+1))  != pInf[i].get(3*j+2) ) {return false;}
+			}
+		}
+		/// etc
+		
+		return true;
 		
 	}
 }
