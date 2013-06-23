@@ -6,6 +6,15 @@ import java.util.Random;
 public class WalshHadamard {
 
 	private final static Random rand = new Random();
+	
+	public static boolean encodeBit(BitSet input, int inLength, BitSet position) {
+		boolean result = false;
+		for (int i = 0; i<inLength; i++) {
+			result = result^(input.get(i)&&position.get(i));
+		}
+		return result;
+	}
+	
 
 	public static BitSet encode(BitSet input, int inLength) {
 		int outLength = (int)Math.pow(2, inLength);
