@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pcp.Ut;
+import prob.SysEqn;
 
 public class WHTest {
 
@@ -30,5 +31,26 @@ public class WHTest {
 	}
 
 	
+	@Test
+	public void testGetRand() {
+		final int size = 128;
+		for (int i = 0; i < 20; ++i) {
+			BitSet random = WH.getRand(size);
+			assertTrue(random.cardinality() <= size);
+		}
+	}
+	
+	@Test
+	public void testVerifRequest() {
+		SysEqn input = new SysEqn(3);
+		
+		BitSet[][] request = WH.verifRequest(input);
+		
+		assertEquals(2, request.length);
+		assertEquals(306, request[0].length);
+		assertEquals(305, request[1].length);
+		
+		//TODO: more tests
+	}
 	
 }
