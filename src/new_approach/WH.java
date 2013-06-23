@@ -30,7 +30,7 @@ public class WH {
 		return result;
 	}
 	
-	public static BitSet getRand(int size) {
+	public static BitSet getRand(int size) {	// size is number of bits, index up to 2^size, index encoding of up to size
 		int numLongs = size/64+1;
 		long[] longs = new long[numLongs];
 		for (int i = 0; i<numLongs; i++) {
@@ -39,48 +39,49 @@ public class WH {
 		return BitSet.valueOf(longs);
 	}
 	
-	public static BitSet[] verifRequest(SysEqn eqns) {
-		int numVars = eqns.getNumVars();
-		BitSet[] wanted = new BitSet[611];	//have one for each size?
-		int assEncSize = (int) Math.pow(2, numVars);
-		int crossEncSize = (int) Math.pow(2, numVars*numVars);
+	public static BitSet[][] verifRequest(SysEqn eqns) {
+		BitSet[][] result = new BitSet[2][];
+		result[0] = new BitSet[306];
+		result[1] = new BitSet[305];
+		int assSize = eqns.getNumVars();
+		int crossSize = assSize* assSize;
 		// for linearity of ass encoding
 		for (int i = 0; i<300; i+=3) {
-			wanted[i] = getRand(assEncSize);
-			wanted[i+1] = getRand(assEncSize);
-			wanted[i+2] = (BitSet) wanted[i].clone();
-			wanted[i+2].xor(wanted[i+1]);
+			result[0][i] = getRand(assSize);
+			result[0][i+1] = getRand(assSize);
+			result[0][i+2] = (BitSet) result[0][i].clone();
+			result[0][i+2].xor(result[0][i+1]);
 		}
 		// for linearity of cross encoding
-		for (int i = 300; i<600; i+=3) {
-			wanted[i] = getRand(crossEncSize);
-			wanted[i+1] = getRand(crossEncSize);
-			wanted[i+2] = (BitSet) wanted[i].clone();
-			wanted[i+2].xor(wanted[i+1]);
+		for (int i = 0; i<300; i+=3) {
+			result[1][i] = getRand(crossSize);
+			result[1][i+1] = getRand(crossSize);
+			result[1][i+2] = (BitSet) result[1][i].clone();
+			result[1][i+2].xor(result[1][i+1]);
 		}
 		// for rel testing
-		for (int i = 600; i<609; i+=3) {
-			wanted[i] = getRand(assEncSize);
-			wanted[i+1] = getRand(assEncSize);
-			wanted[i+2] = doCross(wanted[i],wanted[i+1], assEncSize);
+		for (int i = 0; i<4; i++) {
+			result[0][300+2*i] = getRand(assSize);
+			result[0][300+2*i+1] = getRand(assSize);
+			result[1][300+i] = doCross(result[0][300+2*i],result[0][300+2*i+1], assSize);
 		}
 		// ass testing
-		for (int i = 609; i<611; i++) {
-			Eqn newEqn = new Eqn(numVars);
+		for (int i = 0; i<2; i++) {
+			Eqn newEqn = new Eqn(assSize);
 			BitSet newCoeffs = newEqn.getCoeffs();
 			BitSet eqnCoeffs = null;
 			for (Eqn eqn : eqns.getEqns()) {
 				if (rand.nextBoolean()) {
 					eqnCoeffs = eqn.getCoeffs();
-					for (int j = 0; j< numVars*numVars; j++) {
+					for (int j = 0; j< crossSize; j++) {
 						newCoeffs.set(j,newCoeffs.get(j)^eqnCoeffs.get(j));
 					}
 					newEqn.setRhs(newEqn.getRhs()^eqn.getRhs());
 				}
 			}
-			wanted[i] = newCoeffs;	//might be wrong
+			result[1][304+i] = newCoeffs;	//might be wrong
 		}
-		return wanted;
+		return result;
 	}
 	
 	public static BitSet proverInfo(Assignment assignment, BitSet[] request) {
