@@ -1,6 +1,10 @@
 package around;
 
+import java.util.BitSet;
 import java.util.Random;
+import java.util.Set;
+
+import new_approach.WH;
 
 import prob.Assignment;
 import prob.Eqn;
@@ -23,6 +27,7 @@ public class Generator {
 		return eqn;
 	}
 	
+		
 	public static SysEqn makeSysEqn(int numVars, int numEqns) {
 		if(numEqns>Math.pow(2,numVars*(numVars+1)/2+1)-2) {
 			throw new IllegalArgumentException("Can't have "+numEqns+" eqns with "+numVars+" vars!");
@@ -82,6 +87,36 @@ public class Generator {
 		}
 		result.sysEqn = eqns;
 		result.ass = ass;
+		return result;
+		
+	}
+	
+	public static SysEqnAss makeQuadeqEff2(int numVars, int numEqns) {// hmm about xixj=xjxi
+		if (numEqns>3*numVars) {
+			throw new IllegalArgumentException("Do you really need "+numEqns+" eqns with "+numVars+" vars?");
+		}
+		int crossSize = numVars*numVars;
+		
+		SysEqnAss result = new SysEqnAss();
+		result.ass = makeAss(numVars);
+		BitSet assSet = result.ass.getAssSet();
+		BitSet cross = WH.doCross(assSet, assSet, numVars);
+		
+		result.sysEqn = new SysEqn(numVars);
+		Set<Eqn> eqnSet = result.sysEqn.getEqns();
+		
+		int foundEqns = 0;
+		BitSet lhs, check;
+		Eqn eqn;
+		while(foundEqns<numEqns) {
+			lhs = WH.getRand(crossSize);
+			check = (BitSet) lhs.clone();
+			check.and(cross);
+			eqn = new Eqn(numVars);
+			eqn.setRhs(check.cardinality()%2==1);
+			eqn.setCoeffs(lhs);
+			if (eqnSet.add(eqn)) {foundEqns++;}
+		}
 		return result;
 		
 	}

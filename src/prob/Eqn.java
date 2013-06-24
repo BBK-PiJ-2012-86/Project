@@ -22,6 +22,10 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 		return coeffs;
 	}
 	
+	public void setCoeffs(BitSet coeffs) {
+		this.coeffs = coeffs;
+	}
+	
 	public boolean getRhs() {
 		return rhs;
 	}
@@ -70,7 +74,7 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 	
 	
 	@Override
-	public String toString() {
+	public String toString() {		// changed xij and xji now both allowed
 		String result = "Eqn: ";
 		boolean started = false;
 		int i, j;
@@ -78,7 +82,7 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 			if(coeffs.get(n)) {
 				i = n/numVars+1;
 				j = n%numVars+1;
-				if (i<=j) {
+				if (true) {
 					result+=(started?" + ":"")+"x"+(n/numVars+1)+"*x"+(n%numVars+1);
 					started = true;
 				}

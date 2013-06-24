@@ -149,8 +149,8 @@ public class WHTest {
 	
 	@Test
 	public void testBig() {
-		int toChange = 200;
-		SysEqnAss it = Generator.makeQuadeqEff(toChange, (int) (toChange*2));
+		int toChange = 400;
+		SysEqnAss it = Generator.makeQuadeqEff2(toChange, (int) (toChange*2));
 		System.out.println("made");
 		//System.out.println(it.sysEqn);
 		long time0 = System.currentTimeMillis();

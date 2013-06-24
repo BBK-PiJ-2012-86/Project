@@ -2,6 +2,8 @@ package around;
 
 import java.util.BitSet;
 
+import new_approach.WH;
+
 import prob.Assignment;
 import prob.Eqn;
 import prob.SysEqn;
@@ -16,17 +18,19 @@ public class Checker {
 		BitSet assSet = ass.getAssSet();
 		BitSet coeffs = eqn.getCoeffs();
 		
-		int i, j;
-		boolean lhs = false;
-		for (int n = 0; n< numVars*numVars; n++) {
+		BitSet cross = WH.doCross(assSet, assSet, numVars);
+		cross.and(coeffs);
+		boolean lhs = cross.cardinality()%2==1;
+		//int i, j;
+		/*for (int n = 0; n< numVars*numVars; n++) {
 			if(coeffs.get(n)) {
 				i = n/numVars;
 				j = n%numVars;
-				if (i<=j) {
+				if (true) {
 					lhs = lhs ^ (assSet.get(i)&&assSet.get(j));
 				}
 			}
-		}
+		}*/
 		return lhs==eqn.getRhs();
 	}
 
