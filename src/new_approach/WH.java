@@ -12,7 +12,7 @@ public class WH {
 	private static Random rand = new Random();
 	public static boolean[] rhs = new boolean[2];		// just for now for testing
 	public static String message = null;				// just for now for testing
-
+	
 	public static boolean encodeBit(BitSet input, BitSet position) {
 		position.and(input);
 		return position.cardinality()%2==1;
@@ -69,19 +69,19 @@ public class WH {
 		}
 		// ass testing
 		for (int i = 0; i<2; i++) {
+			int numEqns = eqns.getEqns().size();
+			BitSet random = getRand(numEqns);
 			Eqn newEqn = new Eqn(assSize);
 			BitSet newCoeffs = newEqn.getCoeffs();
-			BitSet eqnCoeffs = null;
+			int k = 0;
 			for (Eqn eqn : eqns.getEqns()) {
-				if (rand.nextBoolean()) {
-					eqnCoeffs = eqn.getCoeffs();
-					for (int j = 0; j< crossSize; j++) {
-						newCoeffs.set(j,newCoeffs.get(j)^eqnCoeffs.get(j));
-					}
+				if (random.get(k)) {
+					newCoeffs.xor( eqn.getCoeffs());
 					newEqn.setRhs(newEqn.getRhs()^eqn.getRhs());
 				}
+				k++;
 			}
-			result[1][303+i] = newCoeffs;	//might be wrong
+			result[1][303+i] = newCoeffs;
 			/*to do properly*/ rhs[i]=newEqn.getRhs();
 		}
 		return result;

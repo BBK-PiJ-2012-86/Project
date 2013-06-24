@@ -1,5 +1,7 @@
 package around;
 
+import java.io.IOException;
+
 import pcp.Proof;
 import pcp.Prover;
 import pcp.VResult;
@@ -12,7 +14,8 @@ public class Script {
 	
 	private static long time;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
+		Object moo = System.in.read();
 		
 		time = System.currentTimeMillis();
 		log("start");
