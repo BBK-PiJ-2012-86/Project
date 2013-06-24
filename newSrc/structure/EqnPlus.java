@@ -14,6 +14,12 @@ public class EqnPlus {
 		this.rhs = rhs;
 		niceify();
 	}
+	/*public EqnPlus(int numVars, BitSet coeffs, boolean rhs, boolean niceify) {	//just for testing
+		this.numVars = numVars;
+		this.coeffs = coeffs;
+		this.rhs = rhs;
+		if (niceify) niceify();
+	}*/
 	public int getNumVars() {
 		return numVars;
 	}
@@ -111,6 +117,28 @@ public class EqnPlus {
 		coeffs.and(ones);
 		return new EqnPlus(numVars, coeffs, rand.nextBoolean());
 	}
+	
+	/*public static EqnPlus makeFaster(int numVars) {
+		int crossSize = numVars*numVars;
+		int numLongs = crossSize/64+1;
+		long[] longs = new long[numLongs];
+		Random rand = new Random();
+		for (int i = 0; i< numLongs; i++) {
+			longs[i]=rand.nextLong();
+		}
+
+		BitSet coeffs = BitSet.valueOf(longs);
+	
+		int a = 0;
+		int n = 0;
+		while (n<numVars) {
+			coeffs.clear(a,a+ n);
+			a+=numVars;
+			n++;
+		}
+		coeffs.clear(crossSize,crossSize+64);
+		return new EqnPlus(numVars, coeffs, rand.nextBoolean(), false);
+	}*/
 	
 	@Override
 	public Object clone() {

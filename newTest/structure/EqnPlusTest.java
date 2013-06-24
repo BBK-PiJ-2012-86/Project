@@ -51,6 +51,17 @@ public class EqnPlusTest {
 		}
 		System.out.println(System.currentTimeMillis()-time);
 		
+	}
+	
+	@Test
+	public void testMakeFaster() {
+		long time = System.currentTimeMillis();
+		EqnPlus eqn;
+		for(int i = 0; i<1000; i++) {
+			eqn = EqnPlus.make(600);
+		}
+		System.out.println("faster? "+(System.currentTimeMillis()-time));
+		
 	}*/
 	
 
