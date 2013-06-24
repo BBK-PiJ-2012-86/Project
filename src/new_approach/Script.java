@@ -40,6 +40,7 @@ public class Script {
 	}
 
 
+	@SuppressWarnings("unused")
 	private static void log(String str) {
 		System.out.println(str+": "+(System.currentTimeMillis()-time));
 		time = System.currentTimeMillis();

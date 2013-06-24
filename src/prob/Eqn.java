@@ -83,7 +83,7 @@ public class Eqn extends Sized{	//THINK ABOUT xij = xji REDUNDANCY...
 				i = n/numVars+1;
 				j = n%numVars+1;
 				if (true) {
-					result+=(started?" + ":"")+"x"+(n/numVars+1)+"*x"+(n%numVars+1);
+					result+=(started?" + ":"")+"x"+(i)+"*x"+(j);
 					started = true;
 				}
 			}

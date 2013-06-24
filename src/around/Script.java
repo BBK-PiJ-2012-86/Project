@@ -15,8 +15,6 @@ public class Script {
 	private static long time;
 
 	public static void main(String[] args) throws IOException {
-		Object moo = System.in.read();
-		
 		time = System.currentTimeMillis();
 		log("start");
 		
