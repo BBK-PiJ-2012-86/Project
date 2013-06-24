@@ -2,11 +2,11 @@ package around;
 
 import java.io.IOException;
 
-import pcp.Proof;
-import pcp.Prover;
-import pcp.VResult;
-import pcp.Verifier;
-import pcp.VerifyFast;
+import pcp_old.Proof;
+import pcp_old.Prover;
+import pcp_old.VResult;
+import pcp_old.Verifier;
+import pcp_old.VerifyFast;
 
 
 

@@ -1,12 +1,12 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import pcp.AssignmentTester;
-import pcp.Proof;
-import pcp.Prover;
+import pcp_old.AssignmentTester;
+import pcp_old.Proof;
+import pcp_old.Prover;
 import prob.Assignment;
 import prob.Eqn;
 import prob.SysEqn;

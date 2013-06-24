@@ -1,4 +1,4 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.*;
 
@@ -7,10 +7,10 @@ import java.util.BitSet;
 import org.junit.Before;
 import org.junit.Test;
 
-import pcp.Proof;
-import pcp.Prover;
-import pcp.VResult;
-import pcp.Verifier;
+import pcp_old.Proof;
+import pcp_old.Prover;
+import pcp_old.VResult;
+import pcp_old.Verifier;
 import prob.Assignment;
 import prob.Eqn;
 import prob.SysEqn;

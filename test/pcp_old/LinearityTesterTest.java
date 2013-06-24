@@ -1,4 +1,4 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import java.util.BitSet;
 
 import org.junit.Test;
 
-import pcp.LinearityTester;
-import pcp.WalshHadamard;
+import pcp_old.LinearityTester;
+import pcp_old.WalshHadamard;
 
 public class LinearityTesterTest {
 	

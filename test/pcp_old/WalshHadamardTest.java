@@ -1,10 +1,12 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.BitSet;
 
 import org.junit.Test;
+
+import pcp_old.WalshHadamard;
 
 public class WalshHadamardTest {
 

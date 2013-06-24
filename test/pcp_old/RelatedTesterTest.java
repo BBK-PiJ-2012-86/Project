@@ -1,12 +1,12 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import pcp.Proof;
-import pcp.Prover;
-import pcp.RelatedTester;
+import pcp_old.Proof;
+import pcp_old.Prover;
+import pcp_old.RelatedTester;
 import prob.Assignment;
 
 public class RelatedTesterTest {

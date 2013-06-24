@@ -1,4 +1,4 @@
-package pcp;
+package pcp_old;
 
 import static org.junit.Assert.*;
 
@@ -6,9 +6,9 @@ import java.util.BitSet;
 
 import org.junit.Test;
 
-import pcp.Proof;
-import pcp.Prover;
-import pcp.WalshHadamard;
+import pcp_old.Proof;
+import pcp_old.Prover;
+import pcp_old.WalshHadamard;
 import prob.Assignment;
 
 public class ProverTest {
