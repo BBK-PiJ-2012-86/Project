@@ -1,7 +1,6 @@
 package structure;
 
 import java.util.BitSet;
-import java.util.Random;
 
 public class EqnPlus extends Eqn {
 		
@@ -9,12 +8,10 @@ public class EqnPlus extends Eqn {
 		super(numVars, coeffs, rhs);
 		niceify();
 	}
-	/*public EqnPlus(int numVars, BitSet coeffs, boolean rhs, boolean niceify) {	//just for testing
-		this.numVars = numVars;
-		this.coeffs = coeffs;
-		this.rhs = rhs;
-		if (niceify) niceify();
-	}*/
+	public EqnPlus(Eqn eqn) {
+		this(eqn.getNumVars(),eqn.getCoeffs(),eqn.getRhs());
+	}
+
 	@Override
 	public void setCoeffs(BitSet coeffs) {
 		super.setCoeffs(coeffs);
@@ -40,39 +37,7 @@ public class EqnPlus extends Eqn {
 	}
 	
 	public static EqnPlus make(int numVars) {
-		int numLongs = numVars*numVars/64+1;
-		long[] longs = new long[numLongs];
-		Random rand = new Random();
-		for (int i = 0; i< numLongs; i++) {
-			longs[i]=rand.nextLong();
-		}
-		BitSet ones = new BitSet();
-		ones.flip(0, numVars*numVars);
-		BitSet coeffs = BitSet.valueOf(longs);
-		coeffs.and(ones);
-		return new EqnPlus(numVars, coeffs, rand.nextBoolean());
+		return new EqnPlus(Eqn.make(numVars));
 	}
-	
-	/*public static EqnPlus makeFaster(int numVars) {
-		int crossSize = numVars*numVars;
-		int numLongs = crossSize/64+1;
-		long[] longs = new long[numLongs];
-		Random rand = new Random();
-		for (int i = 0; i< numLongs; i++) {
-			longs[i]=rand.nextLong();
-		}
-
-		BitSet coeffs = BitSet.valueOf(longs);
-	
-		int a = 0;
-		int n = 0;
-		while (n<numVars) {
-			coeffs.clear(a,a+ n);
-			a+=numVars;
-			n++;
-		}
-		coeffs.clear(crossSize,crossSize+64);
-		return new EqnPlus(numVars, coeffs, rand.nextBoolean(), false);
-	}*/
 
 }

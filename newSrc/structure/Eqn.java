@@ -3,19 +3,16 @@ package structure;
 import java.util.BitSet;
 import java.util.Random;
 
-public class Eqn {
+public class Eqn extends Sized {
 
-	private int numVars;
+	//private int numVars;
 	private BitSet coeffs;	// canonical ordering
 	private boolean rhs;
 		
 	public Eqn(int numVars, BitSet coeffs, boolean rhs) {
-		this.numVars = numVars;
+		super(numVars);
 		this.coeffs = coeffs;
 		this.rhs = rhs;
-	}
-	public int getNumVars() {
-		return numVars;
 	}
 	public BitSet getCoeffs() {
 		return coeffs;
@@ -33,9 +30,8 @@ public class Eqn {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((coeffs == null) ? 0 : coeffs.hashCode());
-		result = prime * result + numVars;
 		result = prime * result + (rhs ? 1231 : 1237);
 		return result;
 	}
@@ -43,7 +39,7 @@ public class Eqn {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (!(obj instanceof Eqn))
 			return false;
@@ -52,8 +48,6 @@ public class Eqn {
 			if (other.coeffs != null)
 				return false;
 		} else if (!coeffs.equals(other.coeffs))
-			return false;
-		if (numVars != other.numVars)
 			return false;
 		if (rhs != other.rhs)
 			return false;
@@ -67,9 +61,9 @@ public class Eqn {
 			if(coeffs.get(n)) {
 				if(started) {builder.append(" + ");	}
 				builder.append("x");
-				builder.append(n/numVars+1);
+				builder.append(n/getNumVars()+1);
 				builder.append("x");
-				builder.append(n%numVars+1);
+				builder.append(n%getNumVars()+1);
 				started = true;
 			}
 		}
@@ -93,10 +87,10 @@ public class Eqn {
 		return new Eqn(numVars, coeffs, rand.nextBoolean());
 	}
 	
-	@Override
+	/*@Override
 	public Object clone() {
 		return new Eqn(numVars, (BitSet)coeffs.clone(), rhs);
-	}
+	}*/
 	
 
 
