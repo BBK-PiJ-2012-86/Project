@@ -3,16 +3,16 @@ package structure;
 import java.util.BitSet;
 import java.util.Random;
 
-public class Eqn {
-
+public class EqnPlus {
 	private int numVars;
-	private BitSet coeffs;	// canonical ordering
+	private BitSet coeffs;	// canonical ordering, cancelled and xij is st i<=j
 	private boolean rhs;
 		
-	public Eqn(int numVars, BitSet coeffs, boolean rhs) {
+	public EqnPlus(int numVars, BitSet coeffs, boolean rhs) {
 		this.numVars = numVars;
 		this.coeffs = coeffs;
 		this.rhs = rhs;
+		niceify();
 	}
 	public int getNumVars() {
 		return numVars;
@@ -22,6 +22,7 @@ public class Eqn {
 	}
 	public void setCoeffs(BitSet coeffs) {
 		this.coeffs = coeffs;
+		niceify();
 	}
 	public boolean getRhs() {
 		return rhs;
@@ -45,9 +46,9 @@ public class Eqn {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Eqn))
+		if (!(obj instanceof EqnPlus))
 			return false;
-		Eqn other = (Eqn) obj;
+		EqnPlus other = (EqnPlus) obj;
 		if (coeffs == null) {
 			if (other.coeffs != null)
 				return false;
@@ -63,14 +64,16 @@ public class Eqn {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		boolean started = false;
-		for (int n = 0; n< coeffs.length(); n++) {
-			if(coeffs.get(n)) {
-				if(started) {builder.append(" + ");	}
-				builder.append("x");
-				builder.append(n/numVars+1);
-				builder.append("x");
-				builder.append(n%numVars+1);
-				started = true;
+		if (coeffs!=null) {
+			for (int n = 0; n< coeffs.length(); n++) {
+				if(coeffs.get(n)) {
+					if(started) {builder.append(" + ");	}
+					builder.append("x");
+					builder.append(n/numVars+1);
+					builder.append("x");
+					builder.append(n%numVars+1);
+					started = true;
+				}
 			}
 		}
 		builder.append(" = ");
@@ -78,8 +81,24 @@ public class Eqn {
 		return builder.toString();
 	}
 	
+		
+	private void niceify() {
+		if (coeffs == null) {return;}
+		BitSet newCoeffs = new BitSet(numVars*numVars);
+		int n, m, diag;
+		for (int i = 0; i<numVars; i++) {
+			diag = i*(numVars+1);
+			newCoeffs.set(diag, coeffs.get(diag));
+			for (int j = i+1; j<numVars; j++) {
+				n = i*numVars+j;
+				m = j*numVars+i;
+				newCoeffs.set(n,coeffs.get(n)^coeffs.get(m));
+			}
+		}
+		coeffs = newCoeffs;
+	}
 	
-	public static Eqn make(int numVars) {
+	public static EqnPlus make(int numVars) {
 		int numLongs = numVars*numVars/64+1;
 		long[] longs = new long[numLongs];
 		Random rand = new Random();
@@ -90,14 +109,13 @@ public class Eqn {
 		ones.flip(0, numVars*numVars);
 		BitSet coeffs = BitSet.valueOf(longs);
 		coeffs.and(ones);
-		return new Eqn(numVars, coeffs, rand.nextBoolean());
+		return new EqnPlus(numVars, coeffs, rand.nextBoolean());
 	}
 	
 	@Override
 	public Object clone() {
-		return new Eqn(numVars, (BitSet)coeffs.clone(), rhs);
+		return new EqnPlus(numVars, (BitSet)coeffs.clone(), rhs);
 	}
 	
-
 
 }
