@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import pcp_old.Ut;
+import utilities.BSM;
 
 public class ProblemTest {
 
@@ -13,10 +13,10 @@ public class ProblemTest {
 	public void testToString() {
 		
 		Eqns eqns = new Eqns(3);
-		eqns.add(new Eqn(3, Ut.make(1,5), false));
-		eqns.add(new Eqn(3, Ut.make(0,1,5), false));
+		eqns.add(new Eqn(3, BSM.make(1,5), false));
+		eqns.add(new Eqn(3, BSM.make(0,1,5), false));
 
-		Assignment ass = new Assignment(3, Ut.make(0,1));
+		Assignment ass = new Assignment(3, BSM.make(0,1));
 		
 		Problem problem = new Problem(3, eqns, ass);
 		
