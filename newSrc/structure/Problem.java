@@ -2,6 +2,7 @@ package structure;
 
 import java.util.BitSet;
 
+import utilities.Manip;
 import utilities.Rand;
 
 public class Problem extends Sized {
@@ -39,14 +40,14 @@ public class Problem extends Sized {
 		return "---\r\n"+eqns.toString()+"\r\n"+ass.toString()+"\r\n---";
 	}
 	
-	public static Problem make(int numVars, int numEqns) {
+	public static Problem makeQ(int numVars, int numEqns) {
 		if (numEqns>3*numVars) {
 			throw new IllegalArgumentException("Do you really need "+numEqns+" eqns with "+numVars+" vars?");
 		}
 		int crossSize = numVars*numVars;
 		
 		Assignment ass = Assignment.make(numVars);
-		BitSet cross = cross(ass.getAssSet(), numVars);
+		BitSet cross = Manip.cross(ass.getAssSet(), ass.getAssSet(), numVars);
 		
 		Eqns eqns = new Eqns(numVars);
 		
@@ -63,19 +64,26 @@ public class Problem extends Sized {
 		return new Problem(numVars, eqns, ass);
 	}
 	
-	private static BitSet cross(BitSet bitSet, int size) {
-		BitSet result = new BitSet(size*size);
-		for (int i = 0; i< size; i++) {
-			if(bitSet.get(i)) {
-				for (int j = 0; j<size; j++) {
-					if (bitSet.get(j)) {
-						result.set(i*size+j);
-					}
-				}
+	public static Problem make(int numVars, int numEqns) {
+		Eqns eqns = new Eqns(numVars);
+		int foundEqns = 0;
+		while(foundEqns<numEqns) {
+			if (eqns.add(Eqn.make(numVars))) {foundEqns++;}
+		}
+		return new Problem(numVars, eqns, Assignment.make(numVars));
+	}
+	
+	public boolean isCorrect() {	//naive
+		BitSet cross = Manip.cross(ass.getAssSet(), ass.getAssSet(), getNumVars());
+		BitSet check;
+		for (Eqn eqn : eqns) {
+			check = (BitSet) eqn.getCoeffs().clone();
+			check.and(cross);
+			if((check.cardinality()%2==1) != eqn.getRhs()) {
+				return false;
 			}
 		}
-		return result;
+		return true;
 	}
-
 
 }

@@ -78,6 +78,10 @@ public class Eqn extends Sized {
 		return new Eqn(numVars, coeffs, Rand.nextBoolean());
 	}
 
+	/*@Override
+	public Eqn clone() {
+		return new Eqn(getNumVars(), (BitSet) coeffs.clone(), rhs);
+	}*/
 	
 
 
