@@ -15,7 +15,6 @@ public class EqnsTest {
 		eqns.add(new Eqn(3, BSM.make(1,5), false));
 		eqns.add(new Eqn(3, BSM.make(0,1,5), false));
 		String result = eqns.toString();
-		System.out.println(result);
 		
 		assertTrue(result.contains("x1x2 + x2x3 = 0"));
 		assertTrue(result.contains("x1x1 + x1x2 + x2x3 = 0"));
