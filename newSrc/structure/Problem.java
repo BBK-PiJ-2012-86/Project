@@ -46,8 +46,7 @@ public class Problem extends Sized {
 		int crossSize = numVars*numVars;
 		
 		Assignment ass = Assignment.make(numVars);
-		BitSet assSet = ass.getAssSet();
-		BitSet cross = cross(assSet, numVars);
+		BitSet cross = cross(ass.getAssSet(), numVars);
 		
 		Eqns eqns = new Eqns(numVars);
 		
