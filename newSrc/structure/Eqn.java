@@ -1,11 +1,11 @@
 package structure;
 
 import java.util.BitSet;
-import java.util.Random;
+
+import utilities.Rand;
 
 public class Eqn extends Sized {
 
-	//private int numVars;
 	private BitSet coeffs;	// canonical ordering
 	private boolean rhs;
 		
@@ -74,23 +74,10 @@ public class Eqn extends Sized {
 	
 	
 	public static Eqn make(int numVars) {
-		int numLongs = numVars*numVars/64+1;
-		long[] longs = new long[numLongs];
-		Random rand = new Random();
-		for (int i = 0; i< numLongs; i++) {
-			longs[i]=rand.nextLong();
-		}
-		BitSet ones = new BitSet();
-		ones.flip(0, numVars*numVars);
-		BitSet coeffs = BitSet.valueOf(longs);
-		coeffs.and(ones);
-		return new Eqn(numVars, coeffs, rand.nextBoolean());
+		BitSet coeffs = Rand.make(numVars*numVars);
+		return new Eqn(numVars, coeffs, Rand.nextBoolean());
 	}
-	
-	/*@Override
-	public Object clone() {
-		return new Eqn(numVars, (BitSet)coeffs.clone(), rhs);
-	}*/
+
 	
 
 

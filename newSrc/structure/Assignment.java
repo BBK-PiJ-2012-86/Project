@@ -2,6 +2,8 @@ package structure;
 
 import java.util.BitSet;
 
+import utilities.Rand;
+
 public class Assignment extends Sized {
 	private BitSet assSet;
 	
@@ -30,6 +32,10 @@ public class Assignment extends Sized {
 				builder.append(", ");
 		}
 		return builder.toString();
+	}
+
+	public static Assignment make(int numVars) {
+		return new Assignment(numVars, Rand.make(numVars));
 	}
 	
 	
