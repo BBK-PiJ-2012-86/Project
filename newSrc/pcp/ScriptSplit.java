@@ -8,9 +8,9 @@ public class ScriptSplit {
 	private static long time;
 
 	public static void main(String[] args) throws IOException {
-		System.in.read();
+		//System.in.read();
 		log("starting");
-		Problem prob = Problem.makeQ(1300, 3000);
+		Problem prob = Problem.makeQ(1300, 3900);
 		log("made");
 		VerifierSplit v = new VerifierSplit();
 		boolean result1 = v.verify1(ProverSplit.proverInfo1(prob.getAss(), v.request1(prob.getEqns())));
