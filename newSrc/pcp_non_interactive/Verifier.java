@@ -32,17 +32,17 @@ public class Verifier {
 			int x = rand.nextInt(assEncSize);
 			int y = rand.nextInt(assEncSize);
 			int xCrossy = 0;	//need a better way of calculating this..
-			int curr = x;
-			/*for (int j = 0; j< numVars; j++) {
+			/*int curr = x;
+			for (int j = 0; j< numVars; j++) {
 				if (curr%2 == 1) {
 					xCrossy+=Math.pow(2, numVars*j)*y;
 				}
 				curr = curr/2;
 			}*/
-			for (int j = 0; j< assEncSize; j++) {
-				xCrossy = (xCrossy << numVars) | (((x & 1<<j) == 0) ? 0 : y); 
+			for (int j = 0; j< numVars; j++) {
+				xCrossy = (xCrossy << numVars) | (((x & 1<<(numVars - j - 1)) == 0) ? 0 : y); 
 			}
-			
+			System.out.println("x=" + x + ",y=" + y + ",cross=" + xCrossy);
 			
 			if((assEnc.get(x)&&assEnc.get(y)) != crossEnc.get(xCrossy)) {
 				System.out.println("cross problem");
@@ -64,13 +64,26 @@ public class Verifier {
 				k++;
 			}
 			//if(crossEnc.get(asInt(newCoeffs,numVars*numVars))!=rhs) {
-			if(crossEnc.get((int)newCoeffs.toLongArray()[0])!=rhs) {
+			System.out.println("newCoeffs=" + newCoeffs);
+			int val = newCoeffs.cardinality() > 0 ? (int)reverse(newCoeffs,numVars*numVars).toLongArray()[0] : 0;
+			System.out.println("newCoeffsVal=" + val);
+			if(crossEnc.get(val) !=rhs) {
 				System.out.println("ass problem");
 				return false;
 			}
 		}
 		
 		return true;
+	}
+	
+	private static BitSet reverse(BitSet bs, int numVars) { //needs revisiting
+		BitSet result = new BitSet(numVars);
+		
+		for (int i = 0; i < numVars; i++) {
+			result.set(i, bs.get(numVars - i - 1));
+		}
+		
+		return result;
 	}
 	
 	/*private static int asInt(BitSet bitSet, int size) {	// need to do better
