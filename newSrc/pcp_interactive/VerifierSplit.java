@@ -1,4 +1,4 @@
-package pcp;
+package pcp_interactive;
 
 import java.util.BitSet;
 

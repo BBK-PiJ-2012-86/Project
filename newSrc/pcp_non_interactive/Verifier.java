@@ -1,15 +1,16 @@
-package pcp_old;
+package pcp_non_interactive;
 
 import java.util.BitSet;
 import java.util.Random;
 
-import prob.Eqn;
-import prob.SysEqn;
+import structure.Eqn;
+import structure.Eqns;
+import utilities.Rand;
 
-public class VerifyFast {
+public class Verifier {
 	private static Random rand = new Random();
 	
-	public static boolean verify(Proof proof, SysEqn eqns) {
+	public static boolean verify(Proof proof, Eqns eqns) {
 		int numVars = proof.getNumVars();
 		BitSet assEnc = proof.getAssEnc();
 		BitSet crossEnc = proof.getCrossEnc();
@@ -44,22 +45,20 @@ public class VerifyFast {
 			}
 		}
 		
-		
 		for (int i = 0; i<2; i++) {
-			Eqn newEqn = new Eqn(numVars);
-			BitSet newCoeffs = newEqn.getCoeffs();
-			BitSet eqnCoeffs = null;
-			for (Eqn eqn : eqns.getEqns()) {
-				if (rand.nextBoolean()) {
-					eqnCoeffs = eqn.getCoeffs();
-					for (int j = 0; j< numVars*numVars; j++) {
-						newCoeffs.set(j,newCoeffs.get(j)^eqnCoeffs.get(j));
-					}
-					newEqn.setRhs(newEqn.getRhs()^eqn.getRhs());
+			int numEqns = eqns.size();
+			BitSet random = Rand.make(numEqns);
+			BitSet newCoeffs = new BitSet(crossEncSize);
+			Boolean rhs = false;
+			int k = 0;
+			for (Eqn eqn : eqns) {
+				if (random.get(k)) {
+					newCoeffs.xor( eqn.getCoeffs());
+					rhs = rhs^eqn.getRhs();
 				}
+				k++;
 			}
-
-			if(crossEnc.get(asInt(newCoeffs,numVars*numVars))!=newEqn.getRhs()) {
+			if(crossEnc.get(asInt(newCoeffs,numVars*numVars))!=rhs) {
 				return false;
 			}
 		}

@@ -31,10 +31,10 @@ public class Script {
 		System.out.println("Result: "+result.message);
 		log("verified");
 		
-		VResult result2 = VerifyFast.verify(proof, quadeq.sysEqn);	//working on efficiency...
+		/*VResult result2 = VerifyFast.verify(proof, quadeq.sysEqn);	//working on efficiency...
 		System.out.println("Result: "+result2.message);
 		log("verified faster?");
-		
+		*/
 		System.out.println(Checker.satisfies(quadeq.ass, quadeq.sysEqn));
 		log("aliter");
 	}
