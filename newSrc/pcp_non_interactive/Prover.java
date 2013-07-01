@@ -3,6 +3,7 @@ package pcp_non_interactive;
 import java.util.BitSet;
 
 import structure.Assignment;
+import utilities.Manip;
 import utilities.WH;
 
 public class Prover {
@@ -14,7 +15,7 @@ public class Prover {
 		
 		BitSet assEnc = WH.encode(assSet, numVars);
 		
-		BitSet cross = new BitSet(numVars*numVars);
+		/*BitSet cross = new BitSet(numVars*numVars);
 		for (int i = 0; i< numVars; i++) {
 			if(assSet.get(i)) {
 				for (int j = 0; j<numVars; j++) {
@@ -23,8 +24,8 @@ public class Prover {
 					}
 				}
 			}
-		}
-		BitSet crossEnc = WH.encode(cross, numVars*numVars);
+		}*/
+		BitSet crossEnc = WH.encode(Manip.cross(assSet, assSet, numVars), numVars*numVars);
 		
 		return new Proof(numVars,assEnc,crossEnc);
 	}
