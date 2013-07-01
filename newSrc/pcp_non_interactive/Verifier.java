@@ -29,18 +29,23 @@ public class Verifier {
 			if( crossEnc.get(x)^crossEnc.get(y) != crossEnc.get(x^y)) {return false;};
 		}
 		for (int i = 0; i<3; i++) {
-			int x = rand.nextInt(numVars);
-			int y = rand.nextInt(numVars);
+			int x = rand.nextInt(assEncSize);
+			int y = rand.nextInt(assEncSize);
 			int xCrossy = 0;	//need a better way of calculating this..
 			int curr = x;
-			for (int j = 0; j< numVars; j++) {
+			/*for (int j = 0; j< numVars; j++) {
 				if (curr%2 == 1) {
 					xCrossy+=Math.pow(2, numVars*j)*y;
 				}
 				curr = curr/2;
+			}*/
+			for (int j = 0; j< assEncSize; j++) {
+				xCrossy = (xCrossy << numVars) | (((x & 1<<j) == 0) ? 0 : y); 
 			}
 			
+			
 			if((assEnc.get(x)&&assEnc.get(y)) != crossEnc.get(xCrossy)) {
+				System.out.println("cross problem");
 				return false;
 			}
 		}
@@ -58,7 +63,9 @@ public class Verifier {
 				}
 				k++;
 			}
-			if(crossEnc.get(asInt(newCoeffs,numVars*numVars))!=rhs) {
+			//if(crossEnc.get(asInt(newCoeffs,numVars*numVars))!=rhs) {
+			if(crossEnc.get((int)newCoeffs.toLongArray()[0])!=rhs) {
+				System.out.println("ass problem");
 				return false;
 			}
 		}
@@ -66,7 +73,7 @@ public class Verifier {
 		return true;
 	}
 	
-	private static int asInt(BitSet bitSet, int size) {	// need to do better
+	/*private static int asInt(BitSet bitSet, int size) {	// need to do better
 		int result = 0;
 		for (int i = 0; i<size; i++) {
 			if (bitSet.get(i)) {
@@ -74,6 +81,6 @@ public class Verifier {
 			}
 		}
 		return result;
-	}
+	}*/
 
 }
