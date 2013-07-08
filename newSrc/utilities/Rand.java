@@ -27,7 +27,7 @@ public class Rand {
 	
 	//Static instance, for backwards compatibility
 	
-	private static final Rand instance = new Rand(new Random());
+	private static Rand instance = new Rand(new Random());
 	
 	public static BitSet make(int n) {
 		return instance.makeRandomBitset(n);
@@ -35,5 +35,9 @@ public class Rand {
 	
 	public static boolean nextBoolean() {
 		return instance.getNextBoolean();
+	}
+	
+	public static void setRandom(Random instance) {
+		Rand.instance = new Rand(instance);
 	}
 }
