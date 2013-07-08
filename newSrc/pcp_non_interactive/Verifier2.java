@@ -9,9 +9,11 @@ import utilities.Rand;
 
 public class Verifier2 {
 	private final Random rand;
+	private final Rand randUtil;
 	
 	public Verifier2(Random rand) {
 		this.rand = rand;
+		randUtil = new Rand(rand);
 	}
 	
 	public boolean verify(Proof proof, Eqns eqns) {
@@ -41,7 +43,7 @@ public class Verifier2 {
 
 	boolean testAss(Eqns eqns, int numVars, BitSet crossEnc, int crossEncSize) {
 		int numEqns = eqns.size();
-		BitSet random = Rand.make(numEqns);
+		BitSet random = randUtil.makeRandomBitset(numEqns);
 		BitSet newCoeffs = new BitSet(crossEncSize);
 		Boolean rhs = false;
 		int k = 0;

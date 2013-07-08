@@ -4,9 +4,13 @@ import java.util.BitSet;
 import java.util.Random;
 
 public class Rand {
-	private static Random random = new Random();
+	private Random random;
 	
-	public static BitSet make(int n) {
+	public Rand(Random rand) {
+		this.random = rand;
+	}
+
+	public BitSet makeRandomBitset(int n) {
 		int numLongs = n/64+1;
 		long[] longs = new long[numLongs];
 		for (int i = 0; i< numLongs; i++) {
@@ -17,7 +21,19 @@ public class Rand {
 		return result;
 	}
 	
-	public static boolean nextBoolean() {
+	public boolean getNextBoolean() {
 		return random.nextBoolean();
+	}
+	
+	//Static instance, for backwards compatibility
+	
+	private static final Rand instance = new Rand(new Random());
+	
+	public static BitSet make(int n) {
+		return instance.makeRandomBitset(n);
+	}
+	
+	public static boolean nextBoolean() {
+		return instance.getNextBoolean();
 	}
 }

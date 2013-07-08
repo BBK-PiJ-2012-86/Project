@@ -1,6 +1,7 @@
 package pcp_interactive;
 
 import java.util.BitSet;
+import java.util.Random;
 
 import structure.Eqn;
 import structure.Eqns;

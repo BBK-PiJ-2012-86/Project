@@ -9,6 +9,7 @@ import utilities.Rand;
 
 public class Verifier {
 	private static Random rand = new Random();
+	private static Rand randUtil = new Rand(rand);
 	
 	public static boolean verify(Proof proof, Eqns eqns) {
 		int numVars = proof.getNumVars();
@@ -52,7 +53,7 @@ public class Verifier {
 		
 		for (int i = 0; i<2; i++) {
 			int numEqns = eqns.size();
-			BitSet random = Rand.make(numEqns);
+			BitSet random = randUtil.make(numEqns);
 			BitSet newCoeffs = new BitSet(crossEncSize);
 			Boolean rhs = false;
 			int k = 0;
