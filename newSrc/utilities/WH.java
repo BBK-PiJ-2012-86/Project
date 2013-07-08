@@ -5,6 +5,10 @@ import java.util.BitSet;
 public class WH {
 	
 	public static BitSet encode(BitSet input, int inLength) {
+		if(inLength < 1)  {
+			throw new IllegalArgumentException("Length to be encoded must be at least 1 bit, but tried encoding " + inLength);
+		}
+		
 		int outLength = (int)Math.pow(2, inLength);
 		BitSet output = new BitSet(outLength);
 		int bitsDone = 2;
