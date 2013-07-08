@@ -8,6 +8,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import structure.Assignment;
 import structure.Eqn;
 import structure.Eqns;
 import utilities.Manip;
@@ -21,6 +22,8 @@ public class Verifier2Test {
 	private BitSet invalidCross;
 	private BitSet testAss;
 	private Eqns testEqns;
+	private Proof validProof;
+	private Proof invalidProof;
 
 	@Before
 	public void setUp() throws Exception {
@@ -53,11 +56,16 @@ public class Verifier2Test {
 		invalidCross = (BitSet) validCross.clone();
 		//invalidCross.set(0);
 		invalidCross.set(1);
+		
+		validProof = new Proof(2, WH.encode(testAss, 2), WH.encode(validCross, 4));
+		invalidProof = new Proof(2, WH.encode(testAss, 2), WH.encode(invalidCross, 4));
 	}
 
 	@Test
 	public void testVerify() {
-		fail("Not yet implemented");
+		assertTrue(ver.verify(validProof, testEqns));
+		
+		assertFalse(ver.verify(invalidProof, testEqns));
 	}
 
 	@Test
